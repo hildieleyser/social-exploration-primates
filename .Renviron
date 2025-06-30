@@ -1,4 +1,0 @@
-PKG_CONFIG_PATH=/opt/homebrew/opt/libxml2/lib/pkgconfig:/opt/homebrew/lib/pkgconfig
-LDFLAGS="-L/opt/homebrew/opt/libxml2/lib"
-CPPFLAGS="-I/opt/homebrew/opt/libxml2/include"
-XML_CONFIG=/opt/homebrew/opt/libxml2/bin/xml2-config
