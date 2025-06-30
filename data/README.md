@@ -2,8 +2,6 @@
 
 ## Dataset: Explore Exploit Dataset.csv
 
-**Note**: The raw dataset is not included in this repository. You must add your own `Explore Exploit Dataset.csv` file to this directory.
-
 ## Dataset Description
 
 The dataset contains behavioral data from 6 non-human primates performing an explore-exploit decision-making task across different social contexts.
