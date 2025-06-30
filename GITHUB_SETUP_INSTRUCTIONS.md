@@ -20,7 +20,7 @@ Your local Git repository is initialized and ready. All analysis files are organ
 After creating the repository, GitHub will show you commands. Run these in your terminal:
 
 ```bash
-git remote add origin https://github.com/YOURUSERNAME/social-frames-analysis.git
+git remote add origin https://github.com/hildieleyser/social-frames-analysis.git
 git branch -M main
 git push -u origin main
 ```
