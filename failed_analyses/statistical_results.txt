@@ -1,0 +1,40 @@
+Chi-square Test Results:
+
+	Chi-squared test for given probabilities
+
+data:  outcome_counts
+X-squared = 196.05, df = 5, p-value < 2.2e-16
+
+
+ANOVA Results for Relative Rank:
+             Df Sum Sq Mean Sq F value   Pr(>F)    
+OUTCOME       5  16.39   3.279   9.905 4.31e-09 ***
+Residuals   562 186.04   0.331                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+1214 observations deleted due to missingness
+
+Tukey's HSD Test Results:
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = RELATIVE_RANK ~ OUTCOME, data = df)
+
+$OUTCOME
+                                     diff         lwr         upr     p adj
+exploit_pink-explore         -0.197863520 -0.38483562 -0.01089142 0.0309255
+exploit_blue-explore          0.349721707  0.04014373  0.65929968 0.0164246
+exploit_red-explore           0.340397698  0.05192089  0.62887451 0.0102268
+exploit_green-explore         0.186551544 -0.03370928  0.40681237 0.1503972
+exploit_yellow-explore        0.111810682 -0.09460579  0.31822715 0.6325894
+exploit_blue-exploit_pink     0.547585227  0.22637579  0.86879467 0.0000209
+exploit_red-exploit_pink      0.538261218  0.23733622  0.83918621 0.0000064
+exploit_green-exploit_pink    0.384415064  0.14808518  0.62074495 0.0000602
+exploit_yellow-exploit_pink   0.309674202  0.08619100  0.53315741 0.0011735
+exploit_red-exploit_blue     -0.009324009 -0.39847155  0.37982353 0.9999998
+exploit_green-exploit_blue   -0.163170163 -0.50483048  0.17849015 0.7475922
+exploit_yellow-exploit_blue  -0.237911025 -0.57081446  0.09499241 0.3189958
+exploit_green-exploit_red    -0.153846154 -0.47651025  0.16881794 0.7489050
+exploit_yellow-exploit_red   -0.228587016 -0.54196386  0.08478983 0.2961377
+exploit_yellow-exploit_green -0.074740862 -0.32673493  0.17725320 0.9582293
+
