@@ -8,14 +8,14 @@ How do social frames of reference influence explore-exploit trade-offs in non-hu
 
 ## Abstract
 
-This repository contains my complete analysis pipeline for investigating the effects of social complexity on explore-exploit decision-making in non-human primates. I examined behavioral data from 6 subjects across 1,782 trials, manipulating social context (individual, dyadic, triadic) to test my hypothesis that increasing social complexity reduces exploration behavior due to increased cognitive load.
+This repository contains a complete analysis pipeline for investigating the effects of social complexity on explore-exploit decision-making in non-human primates. I examined behavioral data from 6 subjects across 1,782 trials, manipulating social context (individual, dyadic, triadic) to test the hypothesis that increasing social complexity reduces exploration behavior due to increased cognitive load.
 
-## Key Findings from My Analysis
+## Key Findings from the Analysis
 
 - **Strong Social Complexity Effect**: I found a clear gradient showing reduced exploration with increased social complexity (Solo: 15.7% → Duo: 15.1% → Trio: 9.5%)
-- **Statistical Significance**: My chi-square test confirms a significant effect (χ² = 58.4, p < 0.001)
+- **Statistical Significance**: the chi-square test confirms a significant effect (χ² = 58.4, p < 0.001)
 - **Large Individual Differences**: I observed exploration rates ranging from 5% to 65% across individuals
-- **Robust Modeling**: My hierarchical multinomial logistic regression provides superior fit
+- **Robust Modeling**: the hierarchical multinomial logistic regression provides superior fit
 - **Interaction Effects**: I discovered that dominance rank modulates social complexity effects
 
 ## Repository Structure
@@ -26,27 +26,27 @@ This repository contains my complete analysis pipeline for investigating the eff
 ├── requirements.txt                    # Python dependencies
 ├── .gitignore                          # Git ignore patterns
 ├── data/
-│   ├── Explore Exploit Dataset.csv    # My behavioral dataset (1,782 trials)
+│   ├── Explore Exploit Dataset.csv    # the behavioral dataset (1,782 trials)
 │   └── README.md                       # Data documentation
 ├── analysis/
-│   ├── Complete_Statistical_Analysis.R    # My comprehensive R analysis pipeline
+│   ├── Complete_Statistical_Analysis.R    # the comprehensive R analysis pipeline
 │   ├── Social_Frames_Python_Analysis.ipynb  # Python/Colab notebook version
 │   └── Comprehensive_Analysis_Notebook.R    # Extended R analysis
 ├── results/
-│   ├── figures/                        # My publication-ready figures (6 main plots)
+│   ├── figures/                        # the figures (6 main plots)
 │   ├── statistical_results_summary.rds    # Complete statistical results
-│   └── final_multinomial_model.rds     # My final statistical model
+│   └── final_multinomial_model.rds     # the final statistical model
 ├── docs/
-│   ├── methodology.md                  # My experimental methodology
+│   ├── methodology.md                  # the experimental methodology
 │   └── mathematical_models_literature.md  # Literature review & mathematical models
 └── .git/                               # Git version control
 ```
 
-## My Mathematical Framework
+## the Mathematical Framework
 
 ### Hierarchical Multinomial Logistic Regression
 
-I developed a statistical model using a hierarchical structure to account for the nested nature of my data:
+I developed a statistical model using a hierarchical structure to account for the nested nature of the data:
 
 **Level 1: Observation Model**
 ```
@@ -67,15 +67,15 @@ v_k ~ MVN(0, Σ_individual)
 
 I provide full mathematical details and literature review in `docs/mathematical_models_literature.md`.
 
-## Getting Started with My Analysis
+## Getting Started with the Analysis
 
 ### Prerequisites
 
-**For R Analysis (my recommended approach):**
+**For R Analysis (how I did it):**
 - R 4.0+
 - Required packages: tidyverse, ggplot2, nnet, MASS, viridis, cowplot
 
-**For Python Analysis:**
+**For Python Analysis (i also translated into python):**
 - Python 3.7+
 - Jupyter Notebook or Google Colab access
 - Required packages (see requirements.txt)
@@ -102,7 +102,7 @@ pacman::p_load(tidyverse, ggplot2, dplyr, readr, broom, lme4, nnet, MASS,
 pip install -r requirements.txt
 ```
 
-### Running My Complete Analysis
+### Running the Complete Analysis
 
 **Full Statistical Pipeline (R):**
 ```r
@@ -116,33 +116,33 @@ This reproduces my entire analysis and generates:
 - Effect size calculations
 
 **Python Analysis (Google Colab):**
-1. Upload my `Social_Frames_Python_Analysis.ipynb` to Google Colab
+1. Upload the `Social_Frames_Python_Analysis.ipynb` to Google Colab
 2. Upload the dataset when prompted
-3. Run all cells to reproduce my complete analysis
+3. Run all cells to reproduce the complete analysis
 
-## My Generated Figures
+## the Generated Figures
 
-My complete analysis produces 6 publication-ready figures:
+the complete analysis produces 6 publication-ready figures:
 
 1. **Main Effects**: Exploration rates by social complexity
 2. **Individual Differences**: Subject-level exploration patterns
-3. **Beta Coefficients**: Forest plot of my model parameters
-4. **Model Predictions**: Predicted choice probabilities from my model
+3. **Beta Coefficients**: Forest plot of the model parameters
+4. **Model Predictions**: Predicted choice probabilities from the model
 5. **Interaction Effects**: Social complexity × rank interactions I discovered
-6. **Model Diagnostics**: Residual plots and fit statistics for my model
+6. **Model Diagnostics**: Residual plots and fit statistics for the model
 
 I save all figures at 300 DPI in `results/figures/` with detailed documentation.
 
-## My Data Description
+## the Data Description
 
-My dataset contains 1,782 behavioral trials from 6 non-human primates:
+the dataset contains 1,782 behavioral trials from 6 non-human primates:
 
 - **Subjects**: 6 individuals I studied (CHOCOLAT, DALI, EBI, FRAN, ICE, ANEMONE)
 - **Social Contexts**: Solo (n=594), Duo (n=594), Trio (n=594)
 - **Behavioral Outcomes**: Explore (n=241), Exploit (n=1,541), None (n=0)
 - **Key Variables**: Social complexity, dominance rank, subjective value, partner presence
 
-## My Methodology
+## the Methodology
 
 ### Experimental Design
 - **Paradigm**: Computerized explore-exploit decision-making task I implemented
@@ -150,36 +150,36 @@ My dataset contains 1,782 behavioral trials from 6 non-human primates:
 - **Data Structure**: Hierarchical design (trials nested within blocks within individuals)
 - **Randomization**: Counterbalanced presentation order I used
 
-### My Statistical Analysis Approach
+### the Statistical Analysis Approach
 - **Primary Model**: Hierarchical multinomial logistic regression I developed
 - **Model Comparison**: Likelihood ratio tests, AIC/BIC comparison I performed
 - **Effect Sizes**: Cramér's V, Cohen's d equivalents I calculated
 - **Validation**: Cross-validation, residual analysis I conducted
 
-### My Theoretical Framework
+### the Theoretical Framework
 
 I grounded my study in multiple theoretical frameworks:
 
-1. **Cognitive Load Theory**: My hypothesis that social complexity increases processing demands
+1. **Cognitive Load Theory**: the hypothesis that social complexity increases processing demands
 2. **Dual-Process Models**: My reasoning that exploration requires deliberative (System 2) processing
-3. **Social Facilitation**: My consideration of how others' presence affects performance
-4. **Game Theory**: My analysis of strategic considerations in multi-agent contexts
+3. **Social Facilitation**: consideration of how others' presence affects performance
+4. **Game Theory**: analysis of strategic considerations in multi-agent contexts
 
 I provide detailed theoretical background in `docs/mathematical_models_literature.md`.
 
-## My Results Summary
+## the Results Summary
 
 ### Statistical Results I Obtained
 - **Chi-square test**: χ² = 58.4, df = 4, p < 0.001
 - **Effect size**: Cramér's V = 0.18 (medium effect)
-- **Model comparison**: My full model significantly outperforms alternatives
+- **Model comparison**: the full model significantly outperforms alternatives
 - **Individual effects**: Large variance component I found (σ² = 1.23)
 
-### Key Findings from My Research
+### Key Findings
 1. **I demonstrated that social complexity significantly reduces exploration behavior**
 2. **I found that individual differences exceed contextual effects in magnitude**
 3. **I discovered that dominance rank interacts with social complexity**
-4. **My model successfully captures the behavioral patterns I observed**
+4. **The model successfully captures the behavioral patterns I observed**
 
 ## How My Work Integrates with Existing Literature
 
@@ -192,14 +192,6 @@ I built my research on extensive literature in:
 
 I provide complete citations and mathematical formulations in `docs/mathematical_models_literature.md`.
 
-## How to Cite My Work
-
-If you use my code or methodology, please cite:
-
-```
-Leyser, H. (2024). Social Frames of Reference in Explore-Exploit Decision-Making: 
-A Comprehensive Analysis of Non-Human Primate Behavioral Data. 
-GitHub repository: https://github.com/hildieleyser/social-frames-analysis
 ```
 
 ## License
@@ -209,10 +201,3 @@ I've made this project available under the MIT License - see the LICENSE file fo
 ## Contact
 
 For questions about my analysis or methodology, please open an issue on GitHub or contact me directly.
-
-## Acknowledgments
-
-- My data collection team and research collaborators
-- Statistical methodology I adapted from hierarchical modeling literature
-- Figure design I developed following publication standards in behavioral science
-- Mathematical formulations I adapted from econometric and psychological literature 
