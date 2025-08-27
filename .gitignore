@@ -83,6 +83,12 @@ venv.bak/
 *.rds
 *.RDS
 
+# Large image files
+*.tiff
+*.tif
+*.TIFF
+*.TIF
+
 # Keep the main dataset
 !"Explore Exploit Dataset.csv"
 !"data/Explore Exploit Dataset.csv" 
