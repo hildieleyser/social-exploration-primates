@@ -1,0 +1,55 @@
+# Required R packages for Social Context Effects on Exploration-Exploitation Decisions
+# Install using: install.packages(c("package1", "package2", ...))
+
+# Core data manipulation and analysis
+dplyr>=1.1.0
+tidyr>=1.3.0
+readr>=2.1.0
+stringr>=1.5.0
+tibble>=3.2.0
+
+# Visualization
+ggplot2>=3.4.0
+viridis>=0.6.0
+scales>=1.2.0
+gridExtra>=2.3
+patchwork>=1.1.0
+cowplot>=1.1.0
+
+# Bayesian modeling
+brms>=2.22.0
+rstan>=2.21.0
+tidybayes>=3.0.0
+bayesplot>=1.10.0
+
+# Statistical analysis
+emmeans>=1.8.0
+lme4>=1.1.0
+nlme>=3.1.0
+
+# Model diagnostics and validation
+performance>=0.10.0
+see>=0.7.0
+sjPlot>=2.8.0
+ggeffects>=1.2.0
+
+# Utilities
+knitr>=1.40.0
+rmarkdown>=2.20.0
+kableExtra>=1.3.0
+DT>=0.25.0
+
+# Additional visualization tools
+ggpubr>=0.5.0
+ggrepel>=0.9.0
+ggridges>=0.5.0
+ggforce>=0.4.0
+
+# Data import/export
+haven>=2.5.0
+writexl>=1.4.0
+openxlsx>=4.2.0
+
+# System dependencies (may need separate installation)
+# rstan requires C++ compiler
+# brms requires Stan 

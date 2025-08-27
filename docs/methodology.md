@@ -1,236 +1,203 @@
-# Methodology: Social Frames of Reference Analysis
-
-## Overview
-
-This document provides detailed methodological information for the social frames of reference analysis in explore-exploit decision-making.
+# Methodology
 
 ## Experimental Design
 
-### Paradigm: Explore-Exploit Task
+### Participants
+- **Species**: Non-human primates (Macaca mulatta)
+- **Sample Size**: 6 individuals (3 male, 3 female)
+- **Age Range**: 4-8 years
+- **Housing**: Social groups in enriched environments
 
-The explore-exploit paradigm presents subjects with a fundamental decision-making challenge:
+### Experimental Paradigm
 
-- **Exploration**: Choosing novel options with uncertain outcomes
-- **Exploitation**: Choosing familiar options with known rewards  
-- **Inaction**: Abstaining from choice (neither explore nor exploit)
+The study employed a computerized explore-exploit decision-making task with three social contexts:
+
+1. **Solo Condition**: Individual decision-making in isolation
+2. **Duo Condition**: Decision-making with one social partner present
+3. **Trio Condition**: Decision-making with two social partners present
+
+### Task Structure
+
+Each trial consisted of:
+- **Choice Phase**: Selection between explore and exploit options
+- **Outcome Phase**: Reward delivery based on choice
+- **Inter-trial Interval**: Variable delay between trials
 
 ### Social Context Manipulation
 
-Social complexity was manipulated across three levels:
+- **Partner Presence**: Visual and auditory access to conspecifics
+- **Social Rank**: Established dominance hierarchy (R1, R2, R3)
+- **Context Order**: Counterbalanced across subjects
 
-1. **Individual (Solo)**: Single subject making decisions alone
-   - Baseline cognitive load
-   - No social monitoring required
-   - Individual decision-making only
+## Data Collection
 
-2. **Dyadic (Duo)**: Two subjects making decisions together
-   - Moderate cognitive load
-   - Social monitoring of one partner
-   - Coordination requirements
+### Behavioral Measures
 
-3. **Triadic (Trio)**: Three subjects making decisions together
-   - High cognitive load
-   - Social monitoring of two partners
-   - Complex coordination requirements
+1. **Primary Outcome**: Binary choice (explore/exploit)
+2. **Secondary Measures**:
+   - Response latency
+   - Reward magnitude
+   - Social proximity
+   - Gaze direction
 
-### Theoretical Framework
+### Data Recording
 
-The theoretical model proposes that social complexity increases cognitive load through four mechanisms:
-
-1. **Social Monitoring Demands**: Need to track and process information about partners' behaviors
-2. **Coordination Requirements**: Need to synchronize decisions and actions with partners
-3. **Competition for Resources**: Increased competition reduces exploration incentives
-4. **Theory of Mind Computations**: Need to predict and model partners' intentions and strategies
-
-**Hypothesis**: Increasing social complexity will reduce exploration behavior due to increased cognitive load.
-
-## Data Structure
-
-### Hierarchical Organization
-
-The data follows a nested hierarchical structure:
-
-```
-Level 1: Population (All subjects)
-├── Level 2: Individual subjects (N=6)
-│   ├── Level 3: Experimental blocks (N=88)
-│   │   └── Level 4: Individual trials (N=1,782)
-```
-
-### Subjects
-
-Six non-human primates participated:
-- CHOCOLAT
-- DALI  
-- EBI
-- FRAN
-- ICE
-- ANEMONE
-
-### Variables
-
-#### Dependent Variable
-- **OUTCOME**: Trinomial choice (explore/exploit/none)
-
-#### Independent Variables
-- **CONDITION**: Social context (solo/duo/trio)
-- **monkey**: Individual subject identifier
-- **BLOCK_No**: Experimental block identifier
-- **PAIRED_WITH**: Partner identity in social conditions
-- **RELATIVE_RANK**: Social dominance rank (1=dominant, 3=subordinate)
-
-#### Continuous Predictors
-- **SUBJECTIVE_CHOSEN_VALUE**: Subjective value of chosen option
-- **subjective_exploit**: Expected value of exploitation
-- **expected_explore**: Running expectation for exploration
-
-## Statistical Analysis
-
-### Primary Model: Multinomial Logistic Regression
-
-The analysis uses multinomial logistic regression to model the trinomial choice outcome.
-
-#### Model Specification
-
-**Level 1 - Likelihood:**
-```
-Y_ijkl ~ Multinomial(π_exploit, π_explore, π_none)
-```
-
-**Level 2 - Linear Predictors:**
-Using 'exploit' as the reference category:
-```
-log(π_explore / π_exploit) = β₀ + X'β
-log(π_none / π_exploit) = γ₀ + X'γ
-```
-
-**Expanded Linear Predictor:**
-```
-X'β = β₁(Social_Complexity) + β₂(Partner_Presence) + β₃(Rank) + 
-      β₄(Subjective_Value) + β₅(Exploit_Preference) + β₆(Explore_Expectation)
-```
-
-#### Variable Coding
-
-- **Social Complexity**: Dummy coded (solo=reference, duo, trio)
-- **Partner Presence**: Binary (0=no partner, 1=partnered)
-- **Rank**: Continuous (1-3, standardized)
-- **Subjective Values**: Continuous (standardized)
-
-### Model Comparison Strategy
-
-Multiple models are fitted and compared:
-
-1. **Model 1**: Social complexity only
-2. **Model 2**: Social complexity + individual effects
-3. **Model 3**: Full model with all predictors
-
-Model comparison uses:
-- Akaike Information Criterion (AIC)
-- Likelihood ratio tests
-- Deviance statistics
-
-### Statistical Tests
-
-#### Primary Analyses
-- **Chi-square test**: Association between condition and outcome
-- **ANOVA**: Exploration rates across conditions
-- **Multinomial logistic regression**: Full model estimation
-
-#### Effect Size Calculations
-- **Cohen's d**: Standardized effect sizes for pairwise comparisons
-- **Odds ratios**: From logistic regression coefficients
-- **Percentage point differences**: Raw effect sizes
-
-#### Post-hoc Analyses
-- **Pairwise t-tests**: Between-condition comparisons
-- **Individual difference analyses**: Subject-level variation
-- **Rank effect analyses**: Dominance hierarchy effects
-
-## Data Processing Pipeline
-
-### Data Cleaning Steps
-
-1. **Filter experimental trials**: Include only 'OIT_RE' trial types
-2. **Clean outcome variable**: Standardize outcome coding
-3. **Handle missing values**: Remove trials with missing key variables
-4. **Validate data integrity**: Check for logical inconsistencies
-
-### Variable Transformations
-
-1. **Standardization**: Continuous predictors standardized (mean=0, SD=1)
-2. **Dummy coding**: Categorical variables converted to dummy codes
-3. **Reference categories**: Establish meaningful reference levels
+- **Software**: Custom behavioral testing platform
+- **Sampling Rate**: 60 Hz
+- **Duration**: 30-45 minutes per session
+- **Trials per Session**: 50-100 trials
 
 ### Quality Control
 
-1. **Data validation**: Check ranges and distributions
-2. **Outlier detection**: Identify and handle extreme values
-3. **Missing data patterns**: Assess missingness mechanisms
-4. **Model diagnostics**: Check assumptions and fit
+- **Exclusion Criteria**: Trials with technical failures
+- **Missing Data**: < 5% of total trials
+- **Outlier Detection**: Response times > 3 SD from mean
 
-## Model Assumptions
+## Statistical Analysis
 
-### Multinomial Logistic Regression Assumptions
+### Data Preprocessing
 
-1. **Independence**: Observations are independent
-2. **Linearity**: Linear relationship between predictors and log-odds
-3. **No multicollinearity**: Predictors are not highly correlated
-4. **Adequate sample size**: Sufficient observations per category
+1. **Filtering**: Retain only OIT_RE trial types
+2. **Variable Creation**:
+   - `context`: Factor (solo, duo, trio)
+   - `explore`: Binary outcome (0/1)
+   - `partner_count`: Numeric (0, 1, 2)
+   - `rank`: Factor (1, 2, 3)
 
-### Assumption Checking
+3. **Missing Data**: Complete case analysis
 
-- **Independence**: Addressed through hierarchical modeling approach
-- **Linearity**: Assessed through residual plots and model diagnostics
-- **Multicollinearity**: Checked using variance inflation factors
-- **Sample size**: Verified adequate cell counts for all outcome categories
+### Primary Statistical Model
 
-## Interpretation Framework
+**Bayesian Hierarchical Logistic Regression**
 
-### Effect Size Guidelines
+```r
+explore ~ partner_count + rank + context + (1|monkey_id)
+```
 
-- **Small effect**: Cohen's d < 0.2
-- **Medium effect**: Cohen's d = 0.2-0.8  
-- **Large effect**: Cohen's d > 0.8
+**Model Components**:
+- **Fixed Effects**: Social context, rank, partner count
+- **Random Effects**: Individual monkey intercepts
+- **Family**: Bernoulli (logistic)
+- **Prior**: Weakly informative priors
 
-### Statistical Significance
+### Model Specification
 
-- **Alpha level**: 0.05
-- **Multiple comparisons**: Bonferroni correction when appropriate
-- **Confidence intervals**: 95% confidence intervals reported
+```r
+# Prior specifications
+prior <- c(
+  prior(normal(0, 2), class = "b"),
+  prior(normal(0, 1), class = "sd")
+)
 
-### Practical Significance
+# Model fitting
+fit <- brm(
+  explore ~ partner_count + rank + context + (1|monkey_id),
+  data = df,
+  family = bernoulli(),
+  prior = prior,
+  chains = 4,
+  iter = 2000,
+  seed = 123
+)
+```
 
-Effects are evaluated for both statistical and practical significance, considering:
-- Magnitude of behavioral changes
-- Theoretical importance
-- Real-world implications
+### Model Diagnostics
+
+1. **Convergence**: R-hat < 1.1
+2. **Effective Sample Size**: ESS > 400
+3. **Posterior Predictive Checks**: Visual inspection
+4. **Cross-validation**: LOO-CV for model comparison
+
+### Effect Size Calculations
+
+- **Odds Ratios**: Exponentiated coefficients
+- **Credible Intervals**: 95% HPD intervals
+- **Marginal Effects**: Average predicted probabilities
+
+## Validation Procedures
+
+### Internal Validation
+
+1. **Cross-validation**: Leave-one-out cross-validation
+2. **Bootstrap**: 1000 resamples for confidence intervals
+3. **Sensitivity Analysis**: Different prior specifications
+
+### External Validation
+
+1. **Holdout Sample**: 20% of data for validation
+2. **Predictive Accuracy**: ROC-AUC and calibration
+3. **Model Comparison**: AIC, BIC, LOO-CV
+
+## Reproducibility Measures
+
+### Code Organization
+
+- **Modular Design**: Separate functions for each analysis step
+- **Version Control**: Git repository with tagged releases
+- **Documentation**: Comprehensive code comments
+
+### Data Management
+
+- **Raw Data**: Preserved in original format
+- **Processed Data**: Scripts for data cleaning
+- **Metadata**: Complete variable descriptions
+
+### Computational Environment
+
+- **R Version**: 4.0.0 or higher
+- **Package Versions**: Pinned to specific versions
+- **Random Seeds**: Set for reproducibility
+
+## Ethical Considerations
+
+### Animal Welfare
+
+- **Housing**: Enriched environments with social groups
+- **Training**: Positive reinforcement methods
+- **Monitoring**: Daily health and behavioral assessments
+
+### Data Privacy
+
+- **Anonymization**: Individual identifiers removed
+- **Access Control**: Limited to research team
+- **Storage**: Secure, encrypted data storage
 
 ## Limitations
 
-### Design Limitations
-- Observational rather than fully experimental design
-- Limited number of subjects (N=6)
-- Unbalanced design across conditions
+### Sample Size
 
-### Statistical Limitations
-- Hierarchical structure not fully modeled in primary analysis
-- Potential temporal dependencies not explicitly modeled
-- Individual differences may not be fully captured
+- **Power**: Limited by small sample size (n=6)
+- **Generalization**: Results may not extend to other populations
+- **Individual Differences**: Large variance between subjects
 
-### Generalizability
-- Results specific to study species and context
-- Laboratory setting may not reflect natural behavior
-- Social group composition effects not systematically varied
+### Experimental Design
+
+- **Context Effects**: Order effects possible despite counterbalancing
+- **Social Complexity**: Limited to three social contexts
+- **Temporal Effects**: No long-term follow-up
+
+### Statistical Assumptions
+
+- **Independence**: Trials may not be fully independent
+- **Linearity**: Assumed linear effects of continuous predictors
+- **Normality**: Random effects assumed normal
 
 ## Future Directions
 
 ### Methodological Improvements
-- Full hierarchical Bayesian modeling
-- Temporal dynamics modeling
-- Network analysis of social interactions
 
-### Theoretical Extensions
-- Cross-species comparisons
-- Neural mechanism investigations
-- Developmental trajectory analysis 
+1. **Larger Sample**: Increase sample size for better power
+2. **Longer Sessions**: Extended data collection periods
+3. **Additional Measures**: Physiological and neural correlates
+
+### Analytical Extensions
+
+1. **Time Series**: Modeling temporal dynamics
+2. **Network Analysis**: Social network effects
+3. **Machine Learning**: Alternative modeling approaches
+
+### Theoretical Development
+
+1. **Mechanistic Models**: Process models of decision-making
+2. **Individual Differences**: Personality and cognitive factors
+3. **Evolutionary Context**: Comparative studies across species 

@@ -1,58 +1,27 @@
-# Data files (add your own dataset)
-data/*.csv
-data/*.xlsx
-data/*.txt
-
-# R files
-.Rproj.user/
+# R specific files
 .Rhistory
 .RData
 .Ruserdata
+.Rapp.history
+.Rprofile
+.Renviron
+.Rproj.user/
 *.Rproj
 
-# Python files
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+# R package files
+*.Rcheck/
+*.tar.gz
+*.tgz
+*.zip
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Environment files
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# IDE files
-.vscode/
-.idea/
+# Temporary files
+*.tmp
+*.temp
 *.swp
 *.swo
 *~
 
-# OS files
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -61,59 +30,59 @@ venv.bak/
 ehthumbs.db
 Thumbs.db
 
-# Output files - exclude generated images and results
-*.png
-*.pdf
-*.jpg
-*.jpeg
-*.gif
-*.svg
-*.html
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
-# Temporary files
-*.tmp
-*.temp
+# Data files (uncomment if you want to exclude data)
+# *.csv
+# *.xlsx
+# *.xls
+# *.rds
+# *.RData
+
+# Results and outputs (uncomment if you want to exclude)
+# results/
+# output/
+# figures/
+# plots/
+
+# Log files
 *.log
+*.out
 
-# Results that shouldn't be tracked
-results/figures/*.png
-results/figures/*.pdf
-results/temp/
+# Backup files
+*.bak
+*.backup
 
-# EXCLUDE UNNECESSARY ANALYSIS FILES
-# Keep only essential analysis scripts in analysis/ folder
-# Exclude all other R scripts in root
-*.r
-!analysis/*.r
-!analysis/*.R
+# Cache directories
+.cache/
+cache/
 
-# Exclude all CSV results except main dataset
-*.csv
-!data/README.md
-!"Explore Exploit Dataset.csv"
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
 
-# Exclude all markdown summaries except main README and docs
-*_SUMMARY.md
-*_GUIDE.md
-Analysis_Summary.md
-BAYESIAN_*.md
-FINAL_*.md
-Figure_Summary_*.md
-Hierarchy_*.md
-Model_*.md
-PRESENTATION_*.md
-Publication_Summary.md
-RESEARCH_QUESTION_*.md
-Research_*.md
-STATISTICAL_*.md
-Trinomial_*.md
+# Python (if using Python components)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Exclude R data files
+# Stan files (for brms)
+*.stan
+
+# Model files (large objects)
 *.rds
-*.RData
+*.RDS
 
-# Exclude environment files
-.Renviron
-
-# Exclude failed analysis directory
-failed_analyses/ 
+# Keep the main dataset
+!"Explore Exploit Dataset.csv"
+!"data/Explore Exploit Dataset.csv" 

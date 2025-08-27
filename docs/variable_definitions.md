@@ -1,0 +1,238 @@
+# Variable Definitions
+
+## Dataset: Explore Exploit Dataset.csv
+
+This document provides detailed definitions for all variables in the primary behavioral dataset.
+
+## Subject Information
+
+### `monkey`
+- **Type**: Character
+- **Description**: Unique identifier for each subject
+- **Values**: A, C, D, E, F, I
+- **Notes**: Anonymized identifiers for 6 non-human primates
+
+### `sex`
+- **Type**: Character
+- **Description**: Biological sex of the subject
+- **Values**: "Male", "Female"
+- **Mapping**: 
+  - Male: D, E, F
+  - Female: A, C, I
+
+## Experimental Design Variables
+
+### `CONDITION`
+- **Type**: Character
+- **Description**: Social context condition
+- **Values**: "solo", "duo", "trio"
+- **Definition**:
+  - `solo`: Individual decision-making in isolation
+  - `duo`: Decision-making with one social partner present
+  - `trio`: Decision-making with two social partners present
+
+### `TRIAL_TYPE`
+- **Type**: Character
+- **Description**: Type of experimental trial
+- **Values**: "OIT_RE" (and others)
+- **Notes**: Main analysis focuses on "OIT_RE" trials
+
+### `BLOCK_No`
+- **Type**: Integer
+- **Description**: Experimental block number
+- **Range**: 1 to maximum block number
+- **Notes**: Blocks represent experimental sessions
+
+## Behavioral Outcome Variables
+
+### `OUTCOME`
+- **Type**: Character
+- **Description**: Behavioral choice made by the subject
+- **Values**: "explore", "exploit", "none"
+- **Definition**:
+  - `explore`: Chose to explore novel option
+  - `exploit`: Chose to exploit known option
+  - `none`: No choice made (abstention)
+
+### `explore`
+- **Type**: Binary (0/1)
+- **Description**: Binary indicator of exploration choice
+- **Values**: 0, 1
+- **Derivation**: `explore = ifelse(OUTCOME == "explore", 1, 0)`
+
+### `explore_rate`
+- **Type**: Numeric
+- **Description**: Proportion of exploration choices
+- **Range**: 0 to 1
+- **Notes**: Aggregated measure for analysis
+
+## Social Context Variables
+
+### `partner_count`
+- **Type**: Integer
+- **Description**: Number of social partners present
+- **Values**: 0, 1, 2
+- **Mapping**:
+  - `solo`: 0 partners
+  - `duo`: 1 partner
+  - `trio`: 2 partners
+
+### `context`
+- **Type**: Factor
+- **Description**: Social context as factor variable
+- **Levels**: "solo", "duo", "trio"
+- **Notes**: Reordered factor levels for analysis
+
+### `RELATIVE_RANK`
+- **Type**: Integer
+- **Description**: Social dominance rank
+- **Values**: 1, 2, 3
+- **Definition**:
+  - 1: Highest rank (dominant)
+  - 2: Middle rank
+  - 3: Lowest rank (subordinate)
+
+### `rank`
+- **Type**: Factor
+- **Description**: Social rank as factor variable
+- **Levels**: 1, 2, 3
+- **Notes**: Used in statistical models
+
+## Reward and Value Variables
+
+### `expected_explore`
+- **Type**: Numeric
+- **Description**: Expected reward value for exploration
+- **Range**: Variable
+- **Notes**: Running expectation based on previous trials
+
+### `exp_reward`
+- **Type**: Numeric
+- **Description**: Expected reward (alias for expected_explore)
+- **Range**: Variable
+- **Notes**: Used in some analyses
+
+### `SUBJECTIVE_CHOSEN_VALUE`
+- **Type**: Numeric
+- **Description**: Subjective value of the chosen option
+- **Range**: Variable
+- **Notes**: May vary by individual
+
+### `subjective_exploit`
+- **Type**: Numeric
+- **Description**: Subjective value of exploitation option
+- **Range**: Variable
+- **Notes**: Individual-specific valuation
+
+## Partner Information
+
+### `PAIRED_WITH`
+- **Type**: Character
+- **Description**: Identity of social partner(s)
+- **Values**: Subject identifiers or combinations
+- **Notes**: Only relevant for duo/trio conditions
+
+## Derived Variables
+
+### `monkey_id`
+- **Type**: Factor
+- **Description**: Subject identifier as factor
+- **Levels**: A, C, D, E, F, I
+- **Notes**: Used for random effects in models
+
+### `run_mean_white`
+- **Type**: Numeric
+- **Description**: Running mean of white reward expectation
+- **Range**: Variable
+- **Notes**: Calculated across trials
+
+### `run_explore`
+- **Type**: Numeric
+- **Description**: Running mean of exploration rate
+- **Range**: 0 to 1
+- **Notes**: Calculated across trials
+
+## Temporal Variables
+
+### `TRIAL_NUMBER`
+- **Type**: Integer
+- **Description**: Sequential trial number within session
+- **Range**: 1 to maximum trials per session
+- **Notes**: May reset between sessions
+
+### `SESSION_DATE`
+- **Type**: Date
+- **Description**: Date of experimental session
+- **Format**: YYYY-MM-DD
+- **Notes**: For temporal analysis
+
+## Quality Control Variables
+
+### `EXCLUDED`
+- **Type**: Binary
+- **Description**: Whether trial was excluded from analysis
+- **Values**: 0, 1
+- **Notes**: Technical failures or invalid trials
+
+### `MISSING_DATA`
+- **Type**: Binary
+- **Description**: Whether trial has missing data
+- **Values**: 0, 1
+- **Notes**: Key variables missing
+
+## Analysis-Specific Variables
+
+### `pred`
+- **Type**: Numeric
+- **Description**: Model-predicted exploration probability
+- **Range**: 0 to 1
+- **Notes**: Generated by statistical models
+
+### `residual`
+- **Type**: Numeric
+- **Description**: Model residual (observed - predicted)
+- **Range**: Variable
+- **Notes**: For model diagnostics
+
+## Data Quality Notes
+
+### Missing Data Patterns
+- Most variables have < 5% missing data
+- Missing data primarily due to technical failures
+- Complete case analysis used for main analyses
+
+### Outlier Detection
+- Response times > 3 SD from mean flagged
+- Extreme reward values checked for validity
+- Individual differences in behavior expected
+
+### Data Validation
+- Logical consistency checks performed
+- Range validation for all numeric variables
+- Cross-validation with experimental logs
+
+## Variable Relationships
+
+### Primary Analysis Variables
+- **Dependent**: `explore` (binary)
+- **Independent**: `partner_count`, `rank`, `context`
+- **Random**: `monkey_id`
+
+### Secondary Analysis Variables
+- **Moderators**: `sex`, `RELATIVE_RANK`
+- **Covariates**: `expected_explore`, `TRIAL_NUMBER`
+- **Outcomes**: `explore_rate`, `OUTCOME`
+
+## Usage Guidelines
+
+### For Primary Analysis
+Use variables: `explore`, `partner_count`, `rank`, `context`, `monkey_id`
+
+### For Exploratory Analysis
+Additional variables: `sex`, `expected_explore`, `TRIAL_NUMBER`
+
+### For Model Diagnostics
+Use: `pred`, `residual`, `EXCLUDED`, `MISSING_DATA`
+
+### For Visualization
+Use: `explore_rate`, `run_mean_white`, `run_explore`, `context`, `rank` 

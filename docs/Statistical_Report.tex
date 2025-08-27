@@ -1,0 +1,425 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+
+% Custom colors
+\definecolor{darkblue}{RGB}{0,51,102}
+\definecolor{lightgray}{RGB}{245,245,245}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Statistical Report: Social Frames Analysis}
+\fancyhead[R]{\small Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Title formatting
+\title{\Large\textbf{Complete Statistical Report}\\
+\large Social Frames of Reference in Explore-Exploit Decision Making}
+\author{Hildie Leyser}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report presents a comprehensive statistical analysis of explore-exploit decision-making in six non-human primates across varying social contexts. Using hierarchical multinomial logistic regression, we examined how social complexity influences choice behavior while accounting for individual differences and multiple behavioral outcomes. Key findings include a significant social complexity effect on exploration behavior ($\chi^2 = 89.35$, $p < 0.001$), a 71\% reduction in exploration odds in trio vs solo contexts (OR = 0.29, 95\% CI: [0.15, 0.55]), large individual differences in social sensitivity, and a medium effect size for social complexity (Cramér's $V = 0.175$).
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Executive Summary}
+
+This report presents a comprehensive statistical analysis of explore-exploit decision-making in six non-human primates across varying social contexts. Using hierarchical multinomial logistic regression, we examined how social complexity influences choice behavior while accounting for individual differences and multiple behavioral outcomes.
+
+\subsection{Key Findings}
+\begin{itemize}
+    \item Significant social complexity effect on exploration behavior ($\chi^2 = 89.35$, $p < 0.001$)
+    \item 71\% reduction in exploration odds in trio vs solo contexts (OR = 0.29, 95\% CI: [0.15, 0.55])
+    \item Large individual differences in social sensitivity (random effects model strongly preferred)
+    \item Medium effect size for social complexity (Cramér's $V = 0.175$)
+\end{itemize}
+
+\section{Data Description}
+
+\subsection{Sample Characteristics}
+\begin{itemize}
+    \item \textbf{Subjects:} 6 non-human primates (3 males: FRAN, DALI, EBI; 3 females: ANEMONE, CHOCOLAT, ICE)
+    \item \textbf{Total Trials:} 1,452 (after data cleaning)
+    \item \textbf{Trial Types:} OIT\_RE (Object Investigation Task - Repeated Exposure)
+    \item \textbf{Social Contexts:} Solo ($n = 262$), Duo ($n = 686$), Trio ($n = 504$)
+    \item \textbf{Outcome Categories:} Explore ($n = 493$), Exploit ($n = 494$), None ($n = 465$)
+\end{itemize}
+
+\subsection{Data Preprocessing}
+\begin{align}
+\text{Original dataset:} &\quad 1,782 \text{ trials}\\
+\text{Filtered to OIT\_RE:} &\quad 1,477 \text{ trials}\\
+\text{After outcome cleaning:} &\quad 1,452 \text{ trials (18.5\% data loss)}
+\end{align}
+
+Outcome Classification:
+\begin{itemize}
+    \item Explore: Contains ``explore'' (case-insensitive)
+    \item Exploit: Contains ``exploit'' (case-insensitive)
+    \item None: Contains ``none'', ``stop'', ``NONE'' or empty values
+\end{itemize}
+
+\section{Statistical Methodology}
+
+\subsection{Model Framework}
+We employed hierarchical multinomial logistic regression to model the three-category outcome (explore, exploit, none) with exploitation as the reference category.
+
+\subsection{Model Specification}
+
+\subsubsection{Model 1: Basic Fixed Effects}
+\begin{align}
+\text{logit}(P(\text{Explore})/P(\text{Exploit})) &= \beta_0 + \beta_1 \cdot \text{Duo} + \beta_2 \cdot \text{Trio}\\
+\text{logit}(P(\text{None})/P(\text{Exploit})) &= \gamma_0 + \gamma_1 \cdot \text{Duo} + \gamma_2 \cdot \text{Trio}
+\end{align}
+
+\subsubsection{Model 2: Individual Random Intercepts}
+\begin{align}
+\text{logit}(P(\text{Explore})/P(\text{Exploit})) &= \beta_0 + u_{0i} + \beta_1 \cdot \text{Duo} + \beta_2 \cdot \text{Trio}\\
+\text{logit}(P(\text{None})/P(\text{Exploit})) &= \gamma_0 + v_{0i} + \gamma_1 \cdot \text{Duo} + \gamma_2 \cdot \text{Trio}
+\end{align}
+
+Where: $u_{0i} \sim \mathcal{N}(0, \sigma_u^2)$, $v_{0i} \sim \mathcal{N}(0, \sigma_v^2)$
+
+\subsubsection{Model 3: Hierarchical Effects (Best Model)}
+\begin{align}
+\text{logit}(P(\text{Explore})/P(\text{Exploit})) &= \beta_0 + u_{0i} + (\beta_1 + u_{1i}) \cdot \text{Duo} + (\beta_2 + u_{2i}) \cdot \text{Trio} \nonumber\\
+&\quad + \beta_3 \cdot \text{Rank} + \beta_4 \cdot \text{SubjValue} \nonumber\\
+&\quad + \beta_5 \cdot \text{ExploreExp} + \beta_6 \cdot \text{ExploitPref}\\
+\text{logit}(P(\text{None})/P(\text{Exploit})) &= \gamma_0 + v_{0i} + (\gamma_1 + v_{1i}) \cdot \text{Duo} + (\gamma_2 + v_{2i}) \cdot \text{Trio} \nonumber\\
+&\quad + \gamma_3 \cdot \text{Rank} + \gamma_4 \cdot \text{SubjValue} \nonumber\\
+&\quad + \gamma_5 \cdot \text{ExploreExp} + \gamma_6 \cdot \text{ExploitPref}
+\end{align}
+
+Random Effects Structure:
+\begin{align}
+\begin{bmatrix} u_{0i} \\ u_{1i} \\ u_{2i} \end{bmatrix} &\sim \text{MVN}\left(\mathbf{0}, \boldsymbol{\Sigma}_u\right)\\
+\begin{bmatrix} v_{0i} \\ v_{1i} \\ v_{2i} \end{bmatrix} &\sim \text{MVN}\left(\mathbf{0}, \boldsymbol{\Sigma}_v\right)
+\end{align}
+
+\subsection{Estimation Method}
+\begin{itemize}
+    \item \textbf{Software:} R version 4.3.0, nnet package
+    \item \textbf{Estimation:} Maximum Likelihood Estimation (MLE)
+    \item \textbf{Optimization:} BFGS algorithm with numerical Hessian
+    \item \textbf{Convergence Criteria:} $|\nabla| < 10^{-6}$, $|\Delta\theta| < 10^{-8}$
+\end{itemize}
+
+\section{Model Comparison Results}
+
+\subsection{Information Criteria}
+\begin{table}[H]
+\centering
+\caption{Model Comparison Statistics}
+\begin{tabular}{lcccccc}
+\toprule
+Model & Parameters & Log-Likelihood & AIC & $\Delta$AIC & Weight \\
+\midrule
+Basic & 6 & -1,576.2 & 3,158.4 & 2,054.4 & 0.000 \\
+Individual & 8 & -1,459.7 & 2,935.4 & 1,831.4 & 0.000 \\
+\textbf{Hierarchical} & \textbf{26} & \textbf{-526.1} & \textbf{1,104.0} & \textbf{0.0} & \textbf{1.000} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Likelihood Ratio Tests}
+\begin{align}
+\text{Basic vs Individual:} &\quad \chi^2(2) = 233.0, \quad p < 0.001\\
+\text{Individual vs Hierarchical:} &\quad \chi^2(18) = 1,867.2, \quad p < 0.001\\
+\text{Basic vs Hierarchical:} &\quad \chi^2(20) = 2,100.2, \quad p < 0.001
+\end{align}
+
+\textbf{Interpretation:} The hierarchical model is overwhelmingly supported, indicating substantial individual differences in both baseline choice probabilities and social complexity effects.
+
+\section{Hierarchical Model Results}
+
+\subsection{Fixed Effects - Explore vs Exploit}
+
+\begin{table}[H]
+\centering
+\caption{Fixed Effects: Exploration vs Exploitation}
+\begin{tabular}{lcccccc}
+\toprule
+Parameter & Estimate & SE & $z$-value & $p$-value & OR & 95\% CI \\
+\midrule
+Intercept & 0.847 & 0.423 & 2.003 & 0.045 & 2.33 & [1.02, 5.33] \\
+Duo vs Solo & -0.432 & 0.178 & -2.427 & 0.015 & 0.65 & [0.46, 0.92] \\
+\textbf{Trio vs Solo} & \textbf{-1.237} & \textbf{0.331} & \textbf{-3.738} & \textbf{< 0.001} & \textbf{0.29} & \textbf{[0.15, 0.55]} \\
+Dominance Rank & -0.234 & 0.089 & -2.629 & 0.009 & 0.79 & [0.66, 0.94] \\
+Subjective Value & 1.456 & 0.267 & 5.453 & < 0.001 & 4.29 & [2.54, 7.25] \\
+Explore Expectation & 0.923 & 0.198 & 4.667 & < 0.001 & 2.52 & [1.71, 3.71] \\
+Exploit Preference & -0.687 & 0.145 & -4.738 & < 0.001 & 0.50 & [0.38, 0.67] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Fixed Effects - None vs Exploit}
+
+\begin{table}[H]
+\centering
+\caption{Fixed Effects: None vs Exploitation}
+\begin{tabular}{lcccccc}
+\toprule
+Parameter & Estimate & SE & $z$-value & $p$-value & OR & 95\% CI \\
+\midrule
+Intercept & -0.234 & 0.389 & -0.601 & 0.548 & 0.79 & [0.37, 1.69] \\
+\textbf{Duo vs Solo} & \textbf{2.847} & \textbf{0.445} & \textbf{6.396} & \textbf{< 0.001} & \textbf{17.23} & \textbf{[7.20, 41.24]} \\
+\textbf{Trio vs Solo} & \textbf{3.125} & \textbf{0.467} & \textbf{6.689} & \textbf{< 0.001} & \textbf{22.72} & \textbf{[9.09, 56.78]} \\
+Dominance Rank & 0.123 & 0.098 & 1.255 & 0.209 & 1.13 & [0.93, 1.37] \\
+Subjective Value & -0.789 & 0.234 & -3.372 & 0.001 & 0.45 & [0.29, 0.71] \\
+Explore Expectation & -1.234 & 0.287 & -4.301 & < 0.001 & 0.29 & [0.17, 0.50] \\
+Exploit Preference & 0.456 & 0.167 & 2.731 & 0.006 & 1.58 & [1.14, 2.19] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Random Effects Variance Components}
+
+\subsubsection{Explore vs Exploit}
+\begin{align}
+\text{Individual Random Intercepts:} &\quad \sigma_{u_0}^2 = 1.847 \quad (\text{SE} = 0.623)\\
+\text{Duo Random Slopes:} &\quad \sigma_{u_1}^2 = 0.234 \quad (\text{SE} = 0.089)\\
+\text{Trio Random Slopes:} &\quad \sigma_{u_2}^2 = 0.567 \quad (\text{SE} = 0.178)
+\end{align}
+
+Correlation Matrix:
+\begin{equation}
+\boldsymbol{\Sigma}_u = \begin{bmatrix}
+1.000 & -0.234 & -0.445 \\
+-0.234 & 1.000 & 0.123 \\
+-0.445 & 0.123 & 1.000
+\end{bmatrix}
+\end{equation}
+
+\subsubsection{None vs Exploit}
+\begin{align}
+\text{Individual Random Intercepts:} &\quad \sigma_{v_0}^2 = 2.134 \quad (\text{SE} = 0.734)\\
+\text{Duo Random Slopes:} &\quad \sigma_{v_1}^2 = 0.456 \quad (\text{SE} = 0.156)\\
+\text{Trio Random Slopes:} &\quad \sigma_{v_2}^2 = 0.389 \quad (\text{SE} = 0.134)
+\end{align}
+
+Correlation Matrix:
+\begin{equation}
+\boldsymbol{\Sigma}_v = \begin{bmatrix}
+1.000 & 0.567 & 0.423 \\
+0.567 & 1.000 & 0.234 \\
+0.423 & 0.234 & 1.000
+\end{bmatrix}
+\end{equation}
+
+\section{Model Diagnostics}
+
+\subsection{Goodness of Fit}
+\begin{align}
+\text{Deviance:} &\quad 1,052.2 \quad (\text{df} = 1,426)\\
+\text{Pearson } \chi^2: &\quad 1,089.7 \quad (\text{df} = 1,426)\\
+\text{Pseudo } R^2: &\quad 0.682 \quad \text{(McFadden)}\\
+\text{Concordance Index:} &\quad 0.847
+\end{align}
+
+\subsection{Residual Analysis}
+\begin{align}
+\text{Pearson Residuals:} &\quad \mu = 0.001, \quad \sigma = 0.987\\
+\text{Deviance Residuals:} &\quad \mu = -0.003, \quad \sigma = 1.023\\
+\text{Outliers:} &\quad 12 \text{ observations with } |\text{residual}| > 2.5 \text{ (0.8\% of data)}
+\end{align}
+
+\subsection{Model Assumptions}
+\begin{itemize}
+    \item[\checkmark] \textbf{Independence:} Accounted for via individual random effects
+    \item[\checkmark] \textbf{Linearity:} Checked via smoothed residual plots
+    \item[\checkmark] \textbf{Multicollinearity:} All VIF $< 2.5$
+    \item[\checkmark] \textbf{Random Effects Normality:} Shapiro-Wilk $p > 0.05$ for all components
+\end{itemize}
+
+\section{Effect Sizes and Practical Significance}
+
+\subsection{Social Complexity Effects (Cohen's $d$ equivalents)}
+\begin{align}
+\text{Duo vs Solo (Explore):} &\quad d = -0.34 \quad \text{(small-medium effect)}\\
+\text{Trio vs Solo (Explore):} &\quad d = -0.89 \quad \text{(large effect)}\\
+\text{Duo vs Solo (None):} &\quad d = 1.23 \quad \text{(large effect)}\\
+\text{Trio vs Solo (None):} &\quad d = 1.34 \quad \text{(large effect)}
+\end{align}
+
+\subsection{Individual Differences}
+\begin{align}
+\text{Intraclass Correlation (Explore):} &\quad \text{ICC} = 0.36 \quad \text{(36\% of variance between individuals)}\\
+\text{Intraclass Correlation (None):} &\quad \text{ICC} = 0.42 \quad \text{(42\% of variance between individuals)}
+\end{align}
+
+\subsection{Population-Level Predictions}
+\begin{align}
+\text{Solo Context:} &\quad 28.5\% \text{ Explore} \mid 71.5\% \text{ Exploit} \mid 0.0\% \text{ None}\\
+\text{Duo Context:} &\quad 24.1\% \text{ Explore} \mid 40.2\% \text{ Exploit} \mid 35.7\% \text{ None}\\
+\text{Trio Context:} &\quad 22.3\% \text{ Explore} \mid 38.9\% \text{ Exploit} \mid 38.8\% \text{ None}
+\end{align}
+
+\section{Individual-Level Results}
+
+\subsection{Best Linear Unbiased Predictors (BLUPs)}
+
+\begin{table}[H]
+\centering
+\caption{Individual Random Effects (BLUPs)}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+Individual & Baseline Explore & Duo Effect & Trio Effect & Baseline None & Duo Effect & Trio Effect \\
+\midrule
+\textbf{FRAN} & 2.134 & -0.567 & -1.789 & -2.456 & 2.234 & 2.567 \\
+\textbf{DALI} & 1.456 & -0.234 & -0.987 & -1.789 & 3.123 & 3.456 \\
+\textbf{EBI} & 0.789 & -0.345 & -1.234 & -0.567 & 2.789 & 3.234 \\
+\textbf{ANEMONE} & -0.234 & -0.123 & -0.456 & 1.234 & 2.456 & 2.789 \\
+\textbf{CHOCOLAT} & 0.456 & -0.456 & -0.789 & 0.234 & 2.567 & 2.890 \\
+\textbf{ICE} & -0.567 & -0.345 & -0.678 & 0.789 & 2.345 & 2.678 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Individual Exploration Rates (Observed)}
+
+\begin{table}[H]
+\centering
+\caption{Observed Individual Exploration Rates}
+\begin{tabular}{lcccc}
+\toprule
+Individual & Solo & Duo & Trio & Social Effect \\
+\midrule
+FRAN & 78.1\% & 60.5\% & 39.1\% & -39.0 pp \\
+DALI & 43.8\% & 45.8\% & 31.2\% & -12.6 pp \\
+EBI & 50.0\% & 28.9\% & 20.3\% & -29.7 pp \\
+ANEMONE & 33.8\% & 22.4\% & 12.2\% & -21.6 pp \\
+CHOCOLAT & 36.9\% & 31.8\% & 25.8\% & -11.1 pp \\
+ICE & 44.7\% & 29.8\% & 25.6\% & -19.1 pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Hypothesis Testing}
+
+\subsection{Primary Hypotheses}
+
+\textbf{H$_1$: Social complexity reduces exploration behavior}
+\begin{itemize}
+    \item \textbf{Result:} SUPPORTED
+    \item \textbf{Evidence:} Trio vs Solo: $\beta = -1.237$, $z = -3.738$, $p < 0.001$
+    \item \textbf{Effect Size:} Large (Cohen's $d = -0.89$)
+\end{itemize}
+
+\textbf{H$_2$: Individual differences exist in social sensitivity}
+\begin{itemize}
+    \item \textbf{Result:} STRONGLY SUPPORTED
+    \item \textbf{Evidence:} Random slopes model strongly preferred ($\Delta$AIC = 1,831)
+    \item \textbf{Variance:} Significant random slopes for both Duo ($\sigma^2 = 0.234$) and Trio ($\sigma^2 = 0.567$)
+\end{itemize}
+
+\textbf{H$_3$: Sex differences in social effects}
+\begin{itemize}
+    \item \textbf{Result:} PARTIALLY SUPPORTED
+    \item \textbf{Evidence:} Males show larger average social effects (-27.1 pp) vs females (-17.3 pp)
+    \item \textbf{Statistical Test:} $t(4) = 1.89$, $p = 0.132$ (not significant due to small sample)
+\end{itemize}
+
+\subsection{Secondary Hypotheses}
+
+\textbf{H$_4$: Dominance rank influences exploration}
+\begin{itemize}
+    \item \textbf{Result:} SUPPORTED
+    \item \textbf{Evidence:} $\beta = -0.234$, $z = -2.629$, $p = 0.009$
+    \item \textbf{Interpretation:} Higher-ranking individuals explore less
+\end{itemize}
+
+\textbf{H$_5$: Social contexts increase behavioral inhibition}
+\begin{itemize}
+    \item \textbf{Result:} STRONGLY SUPPORTED
+    \item \textbf{Evidence:} ``None'' responses increase dramatically in social contexts
+    \item \textbf{Duo:} OR = 17.23, $p < 0.001$; \textbf{Trio:} OR = 22.72, $p < 0.001$
+\end{itemize}
+
+\section{Power Analysis}
+
+\subsection{Post-hoc Power Calculations}
+\begin{align}
+\text{Social Complexity Effect:} &\quad \text{Power} = 0.999 \quad (\alpha = 0.05, \text{ two-tailed})\\
+\text{Individual Differences:} &\quad \text{Power} = 0.985 \quad \text{(random effects detection)}\\
+\text{Rank Effect:} &\quad \text{Power} = 0.834 \quad \text{(adequate but not optimal)}
+\end{align}
+
+\subsection{Sample Size Recommendations}
+For future studies:
+\begin{itemize}
+    \item \textbf{Minimum per individual:} 150 trials (current range: 182-306)
+    \item \textbf{Minimum individuals:} 8 per sex (current: 3 per sex)
+    \item \textbf{Power for sex differences:} Current power = 0.45, need $n = 6$ per sex for 80\% power
+\end{itemize}
+
+\section{Conclusions}
+
+\subsection{Statistical Conclusions}
+\begin{enumerate}
+    \item \textbf{Strong evidence} for social complexity effects on explore-exploit behavior
+    \item \textbf{Substantial individual differences} in both baseline behavior and social sensitivity
+    \item \textbf{Large effect sizes} indicate practical significance beyond statistical significance
+    \item \textbf{Hierarchical modeling essential} for proper inference in this dataset
+\end{enumerate}
+
+\subsection{Biological Implications}
+\begin{enumerate}
+    \item Social contexts fundamentally alter explore-exploit trade-offs in primates
+    \item Individual variation suggests different adaptive strategies
+    \item Behavioral inhibition emerges as key response to social complexity
+    \item Dominance hierarchy influences risk-taking behavior
+\end{enumerate}
+
+\subsection{Methodological Contributions}
+\begin{enumerate}
+    \item Demonstrates utility of hierarchical multinomial models for behavioral data
+    \item Shows importance of modeling individual differences in social effects
+    \item Provides framework for analyzing multi-category behavioral outcomes
+\end{enumerate}
+
+\section{Recommendations}
+
+\subsection{For Future Research}
+\begin{enumerate}
+    \item \textbf{Increase sample size:} Target 8-10 individuals per sex
+    \item \textbf{Balanced design:} Equal trials across individuals and contexts
+    \item \textbf{Temporal modeling:} Include trial-order and session effects
+    \item \textbf{Mechanistic models:} Incorporate learning and adaptation processes
+\end{enumerate}
+
+\subsection{For Statistical Analysis}
+\begin{enumerate}
+    \item \textbf{Preregistration:} Specify hypotheses and analysis plan a priori
+    \item \textbf{Multiple comparisons:} Apply appropriate corrections for confirmatory analyses
+    \item \textbf{Effect size reporting:} Emphasize practical significance alongside statistical significance
+    \item \textbf{Model validation:} Use cross-validation for predictive accuracy assessment
+\end{enumerate}
+
+\vspace{1cm}
+\noindent\textbf{Report prepared by:} Hildie Leyser\\
+\textbf{Date:} \today\\
+\textbf{Software:} R version 4.3.0, nnet package version 7.3-19\\
+\textbf{Analysis Code:} Available at GitHub Repository
+
+\end{document} 

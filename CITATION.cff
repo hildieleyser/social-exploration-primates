@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Leyser"
+    given-names: "Hilde"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "Social Context Effects on Exploration-Exploitation Decisions in Non-Human Primates"
+version: "1.0.0"
+doi: "10.5281/zenodo.0000000"
+date-released: 2024-01-01
+url: "https://github.com/hildieleyser/social-exploration-primates"
+repository-code: "https://github.com/hildieleyser/social-exploration-primates"
+license: MIT
+keywords:
+  - "decision-making"
+  - "exploration-exploitation"
+  - "social context"
+  - "non-human primates"
+  - "bayesian modeling"
+  - "behavioral analysis"
+  - "r"
+  - "brms"
+  - "statistics"
+  - "psychology"
+  - "neuroscience"
+  - "animal behavior"
+abstract: "This repository contains the complete analysis and visualization code for investigating how social context influences exploration-exploitation decision-making in non-human primates. The study examines behavioral data from 6 monkeys across three social conditions (solo, duo, trio) to understand how partner presence and social rank affect exploration strategies. The analysis uses Bayesian hierarchical modeling with the brms package to account for individual differences and provides comprehensive model diagnostics and visualizations." 
