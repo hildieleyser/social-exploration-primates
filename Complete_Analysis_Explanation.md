@@ -25,7 +25,7 @@ As social complexity increases, cognitive load increases due to:
 ## Data Structure and Variables
 
 ### Hierarchical Organization
-Your data has a **4-level hierarchical structure**:
+The data has a **4-level hierarchical structure**:
 1. **Population** (all monkeys)
 2. **Individual monkeys** (6 monkeys: ANEMONE, CHOCOLAT, DALI, EBI, FRAN, ICE)
 3. **Blocks** (88 experimental blocks within monkeys)
@@ -47,7 +47,7 @@ Your data has a **4-level hierarchical structure**:
 ## Statistical Models and Results
 
 ### Model Specification
-Your **hierarchical logistic regression model** matches your handwritten specification:
+The **hierarchical logistic regression model** specification:
 
 ```
 explore_choice ~ social_complexity + rank + expectation + known_value + monkey_id
@@ -157,7 +157,7 @@ Maps research question to specific variables and theoretical framework
 
 ## Conclusion
 
-Your analysis provides **strong evidence** that social frames of reference fundamentally alter explore-exploit decision-making in primates. The hierarchical approach properly accounts for individual differences while demonstrating a robust population-level effect: **increasing social complexity systematically reduces exploration behavior**, supporting the cognitive load hypothesis.
+The analysis provides **strong evidence** that social frames of reference fundamentally alter explore-exploit decision-making in primates. The hierarchical approach properly accounts for individual differences while demonstrating a robust population-level effect: **increasing social complexity systematically reduces exploration behavior**, supporting the cognitive load hypothesis.
 
 This has important implications for understanding:
 - **Primate cognition** under different social conditions
