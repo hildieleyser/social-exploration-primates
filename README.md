@@ -4,14 +4,6 @@
 
 This repository contains the complete analysis and visualization code for investigating how social context influences exploration-exploitation decision-making in non-human primates. The study examines behavioral data from 6 monkeys across three social conditions (solo, duo, trio) to understand how partner presence and social rank affect exploration strategies.
 
-## Citation
-
-If you use this code or data in your research, please cite:
-
-```
-Leyser, H. (2024). Social Context Effects on Exploration-Exploitation Decisions in Non-Human Primates. 
-GitHub Repository. https://github.com/hildieleyser/social-exploration-primates
-```
 
 ## Repository Structure
 
@@ -136,20 +128,9 @@ This is a research repository. For questions or collaboration, please contact th
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
-
-- Research participants and collaborators
-- Open source R community
-- Funding agencies (if applicable)
-
 ## Contact
 
 For questions about this analysis or repository:
-- Email: [your-email@institution.edu]
-- GitHub Issues: [repository-issues-link]
+- Email: [hildelith.leyser@mcgill.ca]
 
-## Version History
 
-- v1.0.0 (2024-01-XX): Initial release with complete analysis pipeline
-- v1.1.0 (2024-01-XX): Added model diagnostics and validation
-- v1.2.0 (2024-01-XX): Enhanced visualizations and documentation
