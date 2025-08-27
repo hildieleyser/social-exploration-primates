@@ -1,0 +1,9 @@
+Figure 2. Hierarchical Regression Analysis of Social Decision-Making
+
+(A) Regression coefficients with individual-specific random slopes for social complexity effects. Population-level fixed effects (triangles) show average responses to social complexity, while individual slopes (circles) reveal substantial heterogeneity in how each monkey responds to social contexts. Negative coefficients indicate reduced probability relative to exploitation baseline. Error bars represent 95% confidence intervals.
+
+(B) Model evaluation using Akaike Information Criterion (AIC) demonstrates clear superiority of hierarchical models incorporating individual differences. The hierarchical model with random slopes (AIC = 2,059) substantially outperforms both basic social-only model (AIC = 2,634) and individual random intercepts model (AIC = 2,084), indicating that individual-specific slopes are critical for capturing behavioral variation.
+
+(C) Choice probability trends across social complexity gradient show smooth nonlinear relationships. LOESS regression curves reveal exploration probability declining sharply with social complexity (purple), exploitation maintaining relative stability (orange), while no-choice responses increase dramatically in trio conditions (blue). Shaded regions represent 95% confidence intervals for trend estimates.
+
+Statistical framework: Hierarchical multinomial logistic regression with individual random intercepts and slopes for social complexity predictors. Model comparison via likelihood ratio tests confirms significant improvement with random slopes (p < 0.001). Analysis accounts for repeated measures within individuals and non-independence of choices across social contexts.

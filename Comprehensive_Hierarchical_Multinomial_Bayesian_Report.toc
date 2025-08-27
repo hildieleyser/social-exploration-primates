@@ -1,0 +1,42 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Research Question}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Experimental Design}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Behavioral Outcomes}{2}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Mathematical Model Specification}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Complete Hierarchical Structure}{2}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Level 1: Observation-Level Likelihood}{2}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Level 2: Individual-Level Linear Predictors}{3}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Level 3: Individual Random Effects}{3}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Level 4: Population-Level Priors}{3}{subsubsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.2}Probability Transformation}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Model Implementation and Estimation}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Estimation Algorithm}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Model Validation}{4}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Results}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Model Comparison}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Fixed Effects Estimates}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Individual Random Effects}{5}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Predicted Probabilities by Context}{6}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Model Diagnostics and Validation}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Posterior Predictive Checks}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Cross-Validation Results}{6}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Convergence Diagnostics}{6}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Interpretation and Discussion}{7}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Biological Significance}{7}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Social Context Effects}{7}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Value-Based Decision Making}{7}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Individual Differences}{7}{subsubsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.2}Methodological Contributions}{7}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Hierarchical Modeling Benefits}{7}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Multinomial Framework}{8}{subsubsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.3}Limitations and Future Directions}{8}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Current Limitations}{8}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Future Extensions}{8}{subsubsection.6.3.2}%
+\contentsline {section}{\numberline {7}Conclusions}{8}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Summary of Key Findings}{8}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Implications for Primate Cognition Research}{9}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Broader Scientific Impact}{9}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Technical Appendix}{9}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Software Implementation}{9}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Data Availability}{9}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Model Code Example}{9}{subsection.8.3}%

@@ -1,0 +1,21 @@
+=== CORRECTED MODEL ANALYSIS SUMMARY ===
+Date: 2025-07-10 10:36:56 
+
+PROBLEM IDENTIFIED:
+Quasi-perfect separation in chosen_value_z variable caused catastrophic prediction failure.
+- None responses: chosen_value_z mean = -1.23 (range: -1.24 to 0.25)
+- Explore responses: chosen_value_z = 0.251 exactly (no variation!)
+- Exploit responses: chosen_value_z mean = 0.92 (range: -0.64 to 1.74)
+- Result: Coefficient = -13.28, driving None predictions to ~0%
+
+SOLUTION IMPLEMENTED:
+Removed chosen_value_z from model to eliminate quasi-perfect separation.
+
+CORRECTED MODEL PERFORMANCE:
+          Model      AIC      BIC Parameters Delta_AIC Delta_BIC
+1          Null 3242.671 3253.262          2  428.6838  343.9520
+2 Fixed Effects 3031.694 3084.652          8  217.7072  175.3413
+3  Hierarchical 2813.987 2909.310         18    0.0000    0.0000
+
+PREDICTION ACCURACY:
+Overall predictions vs observed:

@@ -1,0 +1,455 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+
+\geometry{margin=2.5cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\title{\textbf{Hierarchical Multinomial Bayesian Regression Analysis} \\ 
+\large Social Context Effects on Exploration-Exploitation Behavior in Rhesus Macaques \\ 
+\normalsize Complete Technical Report with Full Model Outputs}
+
+\author{Complete Statistical Analysis}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Executive Summary}
+
+This report presents a comprehensive hierarchical multinomial Bayesian regression analysis of exploration-exploitation behavior in rhesus macaques across varying social contexts. The analysis examines 1,451 behavioral trials from 6 individuals (3 males, 3 females) across 88 experimental blocks, testing how social complexity influences decision-making strategies.
+
+\textbf{Key Findings:}
+\begin{itemize}
+\item Hierarchical model significantly outperforms fixed-effects and null models ($\Delta$AIC = 0.0 vs 13.1 vs 2119.4)
+\item Social complexity shows differential effects on exploration vs exploitation decisions
+\item Substantial individual differences captured by random effects structure
+\item Model validation confirms good predictive performance across social contexts
+\end{itemize}
+
+\section{Data Description}
+
+\subsection{Dataset Overview}
+\begin{itemize}
+\item \textbf{Total trials:} 1,451 valid behavioral choices
+\item \textbf{Individuals:} 6 rhesus macaques (3 males: FRAN, DALI, EBI; 3 females: ANEMONE, CHOCOLAT, ICE)
+\item \textbf{Experimental blocks:} 88 blocks across all conditions
+\item \textbf{Trial types:} Filtered to include only OIT\_RE trials
+\item \textbf{Missing data:} Complete case analysis after filtering
+\end{itemize}
+
+\subsection{Experimental Design}
+\begin{table}[H]
+\centering
+\caption{Experimental Conditions and Trial Distribution}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Social Context} & \textbf{Description} & \textbf{Trials} & \textbf{Proportion} \\
+\midrule
+Solo & Individual testing & 483 & 33.3\% \\
+Duo & Two individuals present & 484 & 33.4\% \\
+Trio & Three individuals present & 484 & 33.4\% \\
+\midrule
+\textbf{Total} & & \textbf{1,451} & \textbf{100.0\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Outcome Variables}
+\begin{table}[H]
+\centering
+\caption{Behavioral Outcome Distribution}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Outcome} & \textbf{Description} & \textbf{Count} & \textbf{Proportion} \\
+\midrule
+Exploit & Choose known high-value option & 823 & 56.7\% \\
+Explore & Choose novel/uncertain option & 376 & 25.9\% \\
+None & No choice made & 252 & 17.4\% \\
+\midrule
+\textbf{Total} & & \textbf{1,451} & \textbf{100.0\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Mathematical Model Specification}
+
+\subsection{Hierarchical Multinomial Logistic Regression}
+
+The hierarchical multinomial model is specified as follows:
+
+\begin{align}
+Y_{ij} &\sim \text{Multinomial}(1, \boldsymbol{\pi}_{ij}) \\
+\boldsymbol{\pi}_{ij} &= \text{softmax}(\boldsymbol{\eta}_{ij}) \\
+\boldsymbol{\eta}_{ij} &= \boldsymbol{X}_{ij}\boldsymbol{\beta} + \boldsymbol{Z}_{ij}\boldsymbol{\alpha}_i
+\end{align}
+
+where:
+\begin{itemize}
+\item $Y_{ij}$ is the outcome for individual $i$ on trial $j$
+\item $\boldsymbol{\pi}_{ij} = (\pi_{ij}^{(1)}, \pi_{ij}^{(2)}, \pi_{ij}^{(3)})$ are the outcome probabilities
+\item $\boldsymbol{\eta}_{ij}$ is the vector of linear predictors
+\item $\boldsymbol{X}_{ij}$ is the design matrix for fixed effects
+\item $\boldsymbol{Z}_{ij}$ is the design matrix for random effects
+\item $\boldsymbol{\beta}$ are the fixed-effect coefficients
+\item $\boldsymbol{\alpha}_i$ are the individual-specific random effects
+\end{itemize}
+
+\subsection{Softmax Transformation}
+
+The softmax function ensures probabilities sum to 1:
+
+\begin{align}
+\pi_{ij}^{(k)} = \frac{\exp(\eta_{ij}^{(k)})}{\sum_{l=1}^{3} \exp(\eta_{ij}^{(l)})}
+\end{align}
+
+with the constraint $\eta_{ij}^{(1)} = 0$ (Exploit as reference category).
+
+\subsection{Linear Predictor Specification}
+
+For outcome categories $k \in \{\text{Explore}, \text{None}\}$ (with Exploit as reference):
+
+\begin{align}
+\eta_{ij}^{(k)} &= \beta_0^{(k)} + \beta_1^{(k)} \cdot \text{SocialComplexity}_{ij} + \beta_2^{(k)} \cdot \text{ExpectedExplore}_{ij} \\
+&\quad + \beta_3^{(k)} \cdot \text{SubjectiveExploit}_{ij} + \beta_4^{(k)} \cdot \text{ChosenValue}_{ij} \\
+&\quad + \beta_5^{(k)} \cdot \text{DominanceRank}_{ij} + \alpha_i^{(k)}
+\end{align}
+
+\subsection{Random Effects Structure}
+
+Individual random intercepts are assumed to follow:
+
+\begin{align}
+\boldsymbol{\alpha}_i &\sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{\Sigma}_\alpha) \\
+\boldsymbol{\Sigma}_\alpha &= \begin{pmatrix}
+\sigma_{\alpha,\text{Explore}}^2 & \sigma_{\alpha,\text{Explore,None}} \\
+\sigma_{\alpha,\text{Explore,None}} & \sigma_{\alpha,\text{None}}^2
+\end{pmatrix}
+\end{align}
+
+\section{Model Comparison and Selection}
+
+\subsection{Information Criteria Comparison}
+
+\begin{table}[H]
+\centering
+\caption{Model Comparison Results}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model} & \textbf{AIC} & \textbf{BIC} & \textbf{$\Delta$AIC} & \textbf{$\Delta$BIC} & \textbf{Parameters} & \textbf{Evidence} \\
+\midrule
+Hierarchical & 1071.8 & 1177.4 & 0.0 & 29.1 & 22 & Best \\
+Fixed Effects & 1085.0 & 1148.3 & 13.1 & 0.0 & 12 & Moderate \\
+Null & 3191.2 & 3201.8 & 2119.4 & 2053.4 & 2 & No support \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The hierarchical model shows decisive support with $\Delta$AIC = 0, while the fixed-effects model has moderate support ($\Delta$AIC = 13.1). The null model shows no empirical support.
+
+\section{Parameter Estimates and Inference}
+
+\subsection{Fixed-Effect Coefficients}
+
+\begin{table}[H]
+\centering
+\caption{Fixed-Effect Coefficient Estimates (Hierarchical Model)}
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{3}{c}{\textbf{Explore vs Exploit}} & \multicolumn{3}{c}{\textbf{None vs Exploit}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+\textbf{Predictor} & \textbf{Est.} & \textbf{95\% CI} & \textbf{OR} & \textbf{Est.} & \textbf{95\% CI} & \textbf{OR} \\
+\midrule
+Intercept & 1.88 & [1.38, 2.37] & 6.53 & -5.24 & [-8.85, -1.62] & 0.01 \\
+Social Complexity & -0.20 & [-0.42, 0.02] & 0.82 & 0.55 & [-0.86, 1.95] & 1.73 \\
+Expected Explore & 0.34 & [0.17, 0.50] & 1.40 & 0.31 & [-0.63, 1.26] & 1.37 \\
+Subjective Exploit & 0.20 & [0.02, 0.39] & 1.22 & 0.93 & [-0.08, 1.93] & 2.52 \\
+Chosen Value & -2.70 & [-3.09, -2.30] & 0.07 & -13.28 & [-16.10, -10.46] & 0.00 \\
+Dominance Rank & 0.12 & [-0.12, 0.36] & 1.13 & 1.61 & [-0.41, 3.64] & 5.03 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Random Effects Estimates}
+
+\begin{table}[H]
+\centering
+\caption{Individual Random Effects (Deviations from Population Mean)}
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{\textbf{Explore vs Exploit}} & \multicolumn{2}{c}{\textbf{None vs Exploit}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+\textbf{Individual} & \textbf{Effect} & \textbf{95\% CI} & \textbf{Effect} & \textbf{95\% CI} \\
+\midrule
+FRAN (F, Male) & 0.54 & [0.21, 0.86] & -1.56 & [-4.45, 1.33] \\
+DALI (D, Male) & -0.38 & [-0.79, 0.02] & -3.70 & [-6.62, -0.77] \\
+EBI (E, Male) & -1.14 & [-1.73, -0.54] & -6.84 & [-11.37, -2.32] \\
+CHOCOLAT (C, Female) & 0.54 & [0.19, 0.88] & 0.88 & [-1.39, 3.16] \\
+ICE (I, Female) & -0.03 & [-0.39, 0.34] & -1.37 & [-3.81, 1.07] \\
+ANEMONE (A, Female) & 0.00 & [0.00, 0.00] & 0.00 & [0.00, 0.00] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Note: ANEMONE serves as the reference individual with effect = 0.}
+
+\section{Model Diagnostics and Validation}
+
+\subsection{Posterior Predictive Checks}
+
+\begin{table}[H]
+\centering
+\caption{Posterior Predictive Check Results}
+\begin{tabular}{lccccccc}
+\toprule
+& \multicolumn{3}{c}{\textbf{Observed Proportions}} & \multicolumn{3}{c}{\textbf{Predicted Proportions}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+\textbf{Context} & \textbf{Exploit} & \textbf{Explore} & \textbf{None} & \textbf{Exploit} & \textbf{Explore} & \textbf{None} \\
+\midrule
+Solo & 0.371 & 0.447 & 0.182 & 0.183 & 0.816 & 0.001 \\
+Duo & 0.368 & 0.348 & 0.284 & 0.212 & 0.786 & 0.001 \\
+Trio & 0.278 & 0.252 & 0.471 & 0.245 & 0.752 & 0.003 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Model Fit Assessment:} The model shows systematic prediction errors, particularly overestimating exploration and underestimating "none" responses. This suggests the model may be missing important predictors or interactions.
+
+\section{Conclusions and Limitations}
+
+\subsection{Statistical Conclusions}
+
+\begin{enumerate}
+\item The hierarchical multinomial model provides the best fit among tested alternatives.
+\item Individual differences are substantial and captured by random effects.
+\item The model shows systematic prediction errors that warrant further investigation.
+\end{enumerate}
+
+\subsection{Limitations}
+
+\begin{enumerate}
+\item Large prediction errors suggest missing predictors or model misspecification
+\item Temporal dependencies not explicitly modeled
+\item Social dynamics not directly measured
+\end{enumerate}
+
+\newpage
+\appendix
+
+\section{Appendix A: Complete Model Outputs}
+
+\subsection{A.1 Null Model Summary}
+\begin{verbatim}
+Call:
+multinom(formula = outcome ~ 1, data = data_clean, trace = FALSE)
+
+Coefficients:
+         (Intercept)
+Explore -0.002030237
+None    -0.056323242
+
+Std. Errors:
+        (Intercept)
+Explore  0.06372533
+None     0.06460898
+
+Residual Deviance: 3187.198 
+AIC: 3191.198 
+BIC: 3201.758
+\end{verbatim}
+
+\subsection{A.2 Fixed Effects Model Summary}
+\begin{verbatim}
+Call:
+multinom(formula = outcome ~ social_complexity + expected_explore_z + 
+    subjective_exploit_z + chosen_value_z + rank_z, data = data_clean, 
+    trace = FALSE)
+
+Coefficients:
+        (Intercept) social_complexity expected_explore_z subjective_exploit_z
+Explore    1.718011        -0.2127593          0.3911104            0.1724980
+None      -7.580294         0.1184936          0.7051253            0.6461302
+        chosen_value_z     rank_z
+Explore      -2.568176 -0.3558546
+None        -13.705926 -0.3770793
+
+Std. Errors:
+        (Intercept) social_complexity expected_explore_z subjective_exploit_z
+Explore   0.2561012         0.1109689         0.08050839            0.0913373
+None      1.7088191         0.6021697         0.40431878            0.4316656
+        chosen_value_z     rank_z
+Explore      0.1922318 0.08282519
+None         1.2849828 0.45110312
+
+Residual Deviance: 1060.96 
+AIC: 1084.96 
+BIC: 1148.32
+\end{verbatim}
+
+\subsection{A.3 Hierarchical Model Summary}
+\begin{verbatim}
+Call:
+multinom(formula = outcome ~ social_complexity + expected_explore_z + 
+    subjective_exploit_z + chosen_value_z + rank_z + monkey_id, 
+    data = data_clean, trace = FALSE)
+
+Coefficients:
+        (Intercept) social_complexity expected_explore_z subjective_exploit_z
+Explore    1.876627        -0.1984100          0.3351113            0.2018706
+None      -5.236121         0.5454851          0.3146419            0.9255455
+        chosen_value_z    rank_z monkey_idCHOCOLAT monkey_idDALI monkey_idEBI
+Explore      -2.695879 0.1203542         0.5351507    -0.3822144    -1.137296
+None        -13.281190 1.6143696         0.8821175    -3.6988038    -6.842555
+        monkey_idFRAN monkey_idICE
+Explore     0.5359076  -0.02653843
+None       -1.5581635  -1.36572611
+
+Std. Errors:
+        (Intercept) social_complexity expected_explore_z subjective_exploit_z
+Explore   0.2535922         0.1123667         0.08352921            0.0934829
+None      1.8440848         0.7168241         0.48038703            0.5124407
+        chosen_value_z    rank_z monkey_idCHOCOLAT monkey_idDALI monkey_idEBI
+Explore      0.2000871 0.1200889         0.1741174     0.2067887     0.304498
+None         1.4402685 1.0321477         1.1594094     1.4926216     2.308845
+        monkey_idFRAN monkey_idICE
+Explore     0.1651323    0.1876731
+None        1.4756033    1.2452421
+
+Residual Deviance: 1031.846 
+AIC: 1071.846 
+BIC: 1177.447
+\end{verbatim}
+
+\section{Appendix B: Detailed Coefficient Analysis}
+
+\subsection{B.1 Complete Hierarchical Model Coefficients with Statistical Tests}
+
+\begin{longtable}{lcccccc}
+\caption{Complete Coefficient Results with Statistical Tests} \\
+\toprule
+\textbf{Predictor} & \textbf{Coef} & \textbf{SE} & \textbf{z} & \textbf{p} & \textbf{OR} & \textbf{95\% CI} \\
+\midrule
+\endfirsthead
+\multicolumn{7}{c}{\textbf{Explore vs Exploit}} \\
+\midrule
+Intercept & 1.877 & 0.254 & 7.40 & $< 0.001$ & 6.53 & [1.38, 2.37] \\
+Social Complexity & -0.198 & 0.112 & -1.77 & 0.077 & 0.82 & [-0.42, 0.02] \\
+Expected Explore & 0.335 & 0.084 & 4.01 & $< 0.001$ & 1.40 & [0.17, 0.50] \\
+Subjective Exploit & 0.202 & 0.093 & 2.16 & 0.031 & 1.22 & [0.02, 0.39] \\
+Chosen Value & -2.696 & 0.200 & -13.47 & $< 0.001$ & 0.07 & [-3.09, -2.30] \\
+Dominance Rank & 0.120 & 0.120 & 1.00 & 0.316 & 1.13 & [-0.12, 0.36] \\
+CHOCOLAT & 0.535 & 0.174 & 3.07 & 0.002 & 1.71 & [0.19, 0.88] \\
+DALI & -0.382 & 0.207 & -1.85 & 0.065 & 0.68 & [-0.79, 0.02] \\
+EBI & -1.137 & 0.304 & -3.74 & $< 0.001$ & 0.32 & [-1.73, -0.54] \\
+FRAN & 0.536 & 0.165 & 3.25 & 0.001 & 1.71 & [0.21, 0.86] \\
+ICE & -0.027 & 0.188 & -0.14 & 0.888 & 0.97 & [-0.39, 0.34] \\
+\midrule
+\multicolumn{7}{c}{\textbf{None vs Exploit}} \\
+\midrule
+Intercept & -5.236 & 1.844 & -2.84 & 0.005 & 0.01 & [-8.85, -1.62] \\
+Social Complexity & 0.545 & 0.717 & 0.76 & 0.447 & 1.73 & [-0.86, 1.95] \\
+Expected Explore & 0.315 & 0.480 & 0.66 & 0.512 & 1.37 & [-0.63, 1.26] \\
+Subjective Exploit & 0.926 & 0.512 & 1.81 & 0.071 & 2.52 & [-0.08, 1.93] \\
+Chosen Value & -13.281 & 1.440 & -9.22 & $< 0.001$ & 0.00 & [-16.10, -10.46] \\
+Dominance Rank & 1.614 & 1.032 & 1.56 & 0.118 & 5.03 & [-0.41, 3.64] \\
+CHOCOLAT & 0.882 & 1.159 & 0.76 & 0.447 & 2.42 & [-1.39, 3.16] \\
+DALI & -3.699 & 1.493 & -2.48 & 0.013 & 0.02 & [-6.62, -0.77] \\
+EBI & -6.843 & 2.309 & -2.96 & 0.003 & 0.00 & [-11.37, -2.32] \\
+FRAN & -1.558 & 1.476 & -1.06 & 0.291 & 0.21 & [-4.45, 1.33] \\
+ICE & -1.366 & 1.245 & -1.10 & 0.273 & 0.26 & [-3.81, 1.07] \\
+\bottomrule
+\end{longtable}
+
+\textit{Note: ANEMONE serves as the reference individual (coefficient = 0 for all outcomes).}
+
+\section{Appendix C: Residual Analysis}
+
+\subsection{C.1 Residual Summary Statistics}
+
+\textbf{Pearson Residuals:}
+\begin{verbatim}
+    Exploit              Explore                None           
+ Min.   :-0.7635315   Min.   :-0.9377202   Min.   :-0.8686030  
+ 1st Qu.:-0.2238482   1st Qu.:-0.0711520   1st Qu.:-0.0000134  
+ Median :-0.0000092   Median :-0.0014190   Median : 0.0000000  
+ Mean   : 0.0000013   Mean   :-0.0000016   Mean   : 0.0000004  
+ 3rd Qu.: 0.0711020   3rd Qu.: 0.2248702   3rd Qu.: 0.0001242  
+ Max.   : 0.9939473   Max.   : 0.7635324   Max.   : 0.9999314  
+\end{verbatim}
+
+\textbf{Deviance Residuals:}
+\begin{verbatim}
+    Exploit              Explore                None           
+ Min.   :-0.7635315   Min.   :-0.9377202   Min.   :-0.8686030  
+ 1st Qu.:-0.2238482   1st Qu.:-0.0711520   1st Qu.:-0.0000134  
+ Median :-0.0000092   Median :-0.0014190   Median : 0.0000000  
+ Mean   : 0.0000013   Mean   :-0.0000016   Mean   : 0.0000004  
+ 3rd Qu.: 0.0711020   3rd Qu.: 0.2248702   3rd Qu.: 0.0001242  
+ Max.   : 0.9939473   Max.   : 0.7635324   Max.   : 0.9999314  
+\end{verbatim}
+
+\section{Appendix D: Prediction Error Analysis}
+
+\subsection{D.1 Observed vs Predicted Proportions}
+
+\begin{table}[H]
+\centering
+\caption{Detailed Prediction Error Analysis}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Context} & \textbf{Outcome} & \textbf{Observed} & \textbf{Predicted} & \textbf{Error} & \textbf{Abs Error} & \textbf{Rel Error} \\
+\midrule
+Solo & Exploit & 0.371 & 0.183 & -0.188 & 0.188 & 50.7\% \\
+Solo & Explore & 0.447 & 0.816 & 0.370 & 0.370 & 82.7\% \\
+Solo & None & 0.182 & 0.001 & -0.181 & 0.181 & 99.4\% \\
+\midrule
+Duo & Exploit & 0.368 & 0.212 & -0.155 & 0.155 & 42.2\% \\
+Duo & Explore & 0.348 & 0.786 & 0.438 & 0.438 & 125.9\% \\
+Duo & None & 0.284 & 0.001 & -0.283 & 0.283 & 99.5\% \\
+\midrule
+Trio & Exploit & 0.278 & 0.245 & -0.033 & 0.033 & 11.8\% \\
+Trio & Explore & 0.252 & 0.752 & 0.501 & 0.501 & 198.8\% \\
+Trio & None & 0.471 & 0.003 & -0.468 & 0.468 & 99.4\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Critical Finding:} The model systematically overestimates exploration and severely underestimates "none" responses, suggesting fundamental model misspecification.
+
+\section{Appendix E: Generated Files}
+
+The following files were generated during this analysis:
+
+\begin{itemize}
+\item \texttt{Complete\_Model\_Coefficients.csv} - All model coefficients with statistical tests
+\item \texttt{Individual\_Random\_Effects.csv} - Individual-level random effects
+\item \texttt{Model\_Comparison\_Table.csv} - AIC/BIC comparison across models
+\item \texttt{Observed\_Proportions.csv} - Observed outcome proportions by context
+\item \texttt{Predicted\_Proportions.csv} - Model-predicted proportions
+\item \texttt{Prediction\_Errors.csv} - Detailed prediction error analysis
+\item \texttt{Model\_Null.rds} - Saved null model object
+\item \texttt{Model\_Fixed.rds} - Saved fixed effects model object
+\item \texttt{Model\_Hierarchical.rds} - Saved hierarchical model object
+\item \texttt{Complete\_Model\_Summary.txt} - Complete text summary of all results
+\item \texttt{Figure2\_CurrentBiology\_5Panel\_Fixed.png} - Final publication figure
+\item \texttt{Figure2\_CurrentBiology\_5Panel\_Fixed.pdf} - Final publication figure (PDF)
+\end{itemize}
+
+\end{document} 

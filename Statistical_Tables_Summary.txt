@@ -1,0 +1,74 @@
+=== STATISTICAL TABLES SUMMARY ===
+Date: 2025-07-10 10:54:06 
+
+MODEL COMPARISON:
+          Model      AIC      BIC Parameters Delta_AIC Delta_BIC
+1          Null 3242.671 3253.262          2  428.6838  343.9520
+2 Fixed Effects 3031.694 3084.652          8  217.7072  175.3413
+3  Hierarchical 2813.987 2909.310         18    0.0000    0.0000
+
+COEFFICIENT ANALYSIS:
+   Outcome                 Term Coefficient         SE    Z_value      P_value
+1  Explore          (Intercept)  0.24144248 0.19365438  1.2467700 2.124818e-01
+2  Explore    social_complexity -0.05377088 0.09528083 -0.5643410 5.725221e-01
+3  Explore   expected_explore_z  0.28996557 0.07223812  4.0140245 5.969216e-05
+4  Explore subjective_exploit_z -0.52534482 0.06845808 -7.6739639 1.665335e-14
+5  Explore               rank_z  0.05507272 0.10223874  0.5386679 5.901161e-01
+6  Explore    monkey_idCHOCOLAT -0.05669098 0.13625809 -0.4160559 6.773691e-01
+7  Explore        monkey_idDALI -0.08344818 0.17868778 -0.4670055 6.404959e-01
+8  Explore         monkey_idEBI -0.43635518 0.25983843 -1.6793327 9.308722e-02
+9  Explore        monkey_idFRAN  0.37092935 0.13740390  2.6995548 6.943233e-03
+10 Explore         monkey_idICE -0.35409638 0.15734205 -2.2504879 2.441799e-02
+11    None          (Intercept) -1.48217105 0.22985096 -6.4484005 1.130367e-10
+12    None    social_complexity  0.84469004 0.10511136  8.0361444 8.881784e-16
+13    None   expected_explore_z -0.01971075 0.07550353 -0.2610573 7.940483e-01
+14    None subjective_exploit_z -0.55274329 0.07389652 -7.4799641 7.438494e-14
+15    None               rank_z  0.90073098 0.10125286  8.8958567 0.000000e+00
+16    None    monkey_idCHOCOLAT  1.31484109 0.17652228  7.4485843 9.436896e-14
+17    None        monkey_idDALI -1.30949261 0.22368156 -5.8542717 4.791050e-09
+18    None         monkey_idEBI -2.08526021 0.25035262 -8.3292926 0.000000e+00
+19    None        monkey_idFRAN -1.53347522 0.26431770 -5.8016366 6.567078e-09
+20    None         monkey_idICE -0.42914701 0.16598511 -2.5854549 9.725059e-03
+          OR
+1  1.2730842
+2  0.9476492
+3  1.3363815
+4  0.5913514
+5  1.0566175
+6  0.9448860
+7  0.9199388
+8  0.6463881
+9  1.4490807
+10 0.7018073
+11 0.2271440
+12 2.3272563
+13 0.9804822
+14 0.5753692
+15 2.4614017
+16 3.7241591
+17 0.2699570
+18 0.1242748
+19 0.2157845
+20 0.6510642
+
+CONTEXT PREDICTIONS:
+  social_complexity outcome  observed predicted      error context
+1                 1 Exploit 0.3710692 0.4001033 0.02903411    Solo
+2                 1 Explore 0.4465409 0.3534882 0.09305265    Solo
+3                 1    None 0.1823899 0.2863347 0.10394475    Solo
+4                 2 Exploit 0.3573487 0.4385088 0.08116009     Duo
+5                 2 Explore 0.3371758 0.3680025 0.03082674     Duo
+6                 2    None 0.3054755 0.2837459 0.02172961     Duo
+7                 3 Exploit 0.2770563 0.1613879 0.11566836    Trio
+8                 3 Explore 0.2510823 0.2785092 0.02742699    Trio
+9                 3    None 0.4718615 0.4299194 0.04194205    Trio
+
+CROSS-VALIDATION:
+         Fold Exploit_Error Explore_Error  None_Error Mean_Error  Accuracy
+Exploit     1    0.05931358   0.019481665 0.039831910 0.03954238 0.9604576
+Exploit1    2    0.03113313   0.055190547 0.024057421 0.03679370 0.9632063
+Exploit2    3    0.02785819   0.019204884 0.047063075 0.03137538 0.9686246
+Exploit3    4    0.07513249   0.008282604 0.083415090 0.05561006 0.9443899
+Exploit4    5    0.05404301   0.044920176 0.009122832 0.03602867 0.9639713
+
+Mean CV accuracy: 96.0%

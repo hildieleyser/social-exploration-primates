@@ -1,0 +1,65 @@
+
+PANEL A SUMMARY TABLE:
+[38;5;246m# A tibble: 6 × 4[39m
+[38;5;246m# Groups:   context_binary [2][39m
+  context_binary choice      n   prop
+  [3m[38;5;246m<chr>[39m[23m          [3m[38;5;246m<fct>[39m[23m   [3m[38;5;246m<int>[39m[23m  [3m[38;5;246m<dbl>[39m[23m
+[38;5;250m1[39m Non-Social     exploit    50 0.130 
+[38;5;250m2[39m Non-Social     explore    50 0.130 
+[38;5;250m3[39m Non-Social     none      284 0.740 
+[38;5;250m4[39m Social         exploit   111 0.079[4m4[24m
+[38;5;250m5[39m Social         explore   146 0.104 
+[38;5;250m6[39m Social         none     [4m1[24m141 0.816 
+
+PANEL B SUMMARY TABLE:
+[38;5;246m# A tibble: 9 × 4[39m
+[38;5;246m# Groups:   context [3][39m
+  context choice      n   prop
+  [3m[38;5;246m<fct>[39m[23m   [3m[38;5;246m<fct>[39m[23m   [3m[38;5;246m<int>[39m[23m  [3m[38;5;246m<dbl>[39m[23m
+[38;5;250m1[39m solo    exploit    50 0.130 
+[38;5;250m2[39m solo    explore    50 0.130 
+[38;5;250m3[39m solo    none      284 0.740 
+[38;5;250m4[39m duo     exploit    72 0.085[4m7[24m
+[38;5;250m5[39m duo     explore   102 0.121 
+[38;5;250m6[39m duo     none      666 0.793 
+[38;5;250m7[39m trio    exploit    39 0.069[4m9[24m
+[38;5;250m8[39m trio    explore    44 0.078[4m9[24m
+[38;5;250m9[39m trio    none      475 0.851 
+
+PANEL C SUMMARY TABLE (first 20 rows):
+[38;5;246m# A tibble: 20 × 7[39m
+[38;5;246m# Groups:   monkey_initial, context [9][39m
+   monkey_initial sex    rank context choice      n   prop
+   [3m[38;5;246m<chr>[39m[23m          [3m[38;5;246m<chr>[39m[23m [3m[38;5;246m<dbl>[39m[23m [3m[38;5;246m<fct>[39m[23m   [3m[38;5;246m<fct>[39m[23m   [3m[38;5;246m<int>[39m[23m  [3m[38;5;246m<dbl>[39m[23m
+[38;5;250m 1[39m A              [31mNA[39m        3 solo    exploit    11 0.141 
+[38;5;250m 2[39m A              [31mNA[39m        3 solo    none       67 0.859 
+[38;5;250m 3[39m A              [31mNA[39m        3 duo     exploit     3 0.019[4m2[24m
+[38;5;250m 4[39m A              [31mNA[39m        3 duo     none      153 0.981 
+[38;5;250m 5[39m A              [31mNA[39m        3 trio    none      108 1     
+[38;5;250m 6[39m C              F         1 solo    exploit    10 0.128 
+[38;5;250m 7[39m C              F         1 solo    none       68 0.872 
+[38;5;250m 8[39m C              F         1 duo     exploit    18 0.115 
+[38;5;250m 9[39m C              F         1 duo     none      138 0.885 
+[38;5;250m10[39m C              F         1 trio    exploit    13 0.120 
+[38;5;250m11[39m C              F         1 trio    none       95 0.880 
+[38;5;250m12[39m D              M         2 solo    exploit     9 0.231 
+[38;5;250m13[39m D              M         2 solo    explore    13 0.333 
+[38;5;250m14[39m D              M         2 solo    none       17 0.436 
+[38;5;250m15[39m D              M         2 duo     exploit    11 0.094[4m0[24m
+[38;5;250m16[39m D              M         2 duo     explore    32 0.274 
+[38;5;250m17[39m D              M         2 duo     none       74 0.632 
+[38;5;250m18[39m D              M         2 trio    exploit     6 0.076[4m9[24m
+[38;5;250m19[39m D              M         2 trio    explore    20 0.256 
+[38;5;250m20[39m D              M         2 trio    none       52 0.667 
+
+PANEL D SUMMARY TABLE:
+[38;5;246m# A tibble: 6 × 3[39m
+  monkey_initial sex   explore_rate
+  [3m[38;5;246m<chr>[39m[23m          [3m[38;5;246m<chr>[39m[23m        [3m[38;5;246m<dbl>[39m[23m
+[38;5;250m1[39m A              [31mNA[39m           0    
+[38;5;250m2[39m C              F            0    
+[38;5;250m3[39m D              M            0.278
+[38;5;250m4[39m E              M            0.174
+[38;5;250m5[39m F              F            0.383
+[38;5;250m6[39m I              F            0    
+Panels and summary tables complete.

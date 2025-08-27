@@ -1,0 +1,11 @@
+Figure 1. Behavioral Measurements (Sex-Grouped)
+
+(A) Choice proportions across social contexts show significant differences between non-social and social conditions. Exploration behavior decreases while exploitation increases in social settings, with 'no choice' responses remaining stable (N = 1,452 trials).
+
+(B) Social complexity analysis reveals a systematic decline in exploration from solo to trio conditions. Exploitation rates remain relatively stable across social complexity levels, while exploration shows significant reduction with increasing social group size (solo: 44.8%, duo: 35.0%, trio: 25.2%).
+
+(C) Individual choice patterns by dominance rank demonstrate substantial inter-individual variation in behavioral strategies. Top row shows males (F = rank 1, D = rank 2, E = rank 3), bottom row shows females (C = rank 1, I = rank 2, A = rank 3). Stacked bars represent proportion of exploration, exploitation, and no-choice responses across social complexity conditions.
+
+(D) Sex-grouped exploration rates reveal differential social responsiveness between males and females. Males (F, D, E) and females (A, C, I) show distinct patterns of exploration reduction in social versus non-social contexts, with significant individual variation within each sex (error bars represent 95% confidence intervals).
+
+Statistical analysis: Multinomial logistic regression with individual random effects. All comparisons significant at p < 0.001 (χ² = 84.52, df = 4, Cramér's V = 0.171). Data from 6 long-tailed macaques across 1,452 trials in explore-exploit decision-making paradigm.

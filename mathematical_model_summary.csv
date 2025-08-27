@@ -1,0 +1,7 @@
+"Component","Coefficient","Interpretation","Significance"
+"Baseline",32.1,"Default exploration rate","Baseline"
+"Social Complexity",-10.5,"Cost per additional social partner","p < 0.001"
+"Hierarchy Advantage",7.5,"Benefit per hierarchy level","p < 0.001"
+"Sex Strategy",11.1,"Male exploration bonus","p < 0.001"
+"Value Integration",88.47,"Strongest predictor - subjective value","p < 0.001"
+"Individual Variation",10.7,"Individual differences (SD)","Large variation"

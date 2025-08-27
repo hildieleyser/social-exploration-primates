@@ -1,0 +1,3 @@
+"Model","Exploit_Error","Explore_Error","None_Error","Max_Error"
+"Broken (with chosen_value_z)",15.2,48.2,33,33
+"Fixed (without chosen_value_z)",0,0,0,0

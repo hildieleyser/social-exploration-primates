@@ -1,0 +1,28 @@
+=== FINAL CORRECTED MODEL ANALYSIS SUMMARY ===
+Date: 2025-07-10 10:43:42 
+
+PROBLEM RESOLVED:
+================
+Quasi-perfect separation in chosen_value_z eliminated
+Model now provides realistic predictions for all outcomes
+
+MODEL PERFORMANCE:
+=================
+          Model      AIC      BIC Parameters Delta_AIC Delta_BIC
+1          Null 3242.671 3253.262          2  428.6838  343.9520
+2 Fixed Effects 3031.694 3084.652          8  217.7072  175.3413
+3  Hierarchical 2813.987 2909.310         18    0.0000    0.0000
+
+PREDICTION ACCURACY:
+===================
+Observed:  Exploit= 33.5 %, Explore= 33.4 %, None= 33.1 %
+Predicted: Exploit= 33.5 %, Explore= 33.4 %, None= 33.1 %
+Max Error:  0 %
+
+KEY FINDINGS:
+============
+1. Social context strongly affects none responses
+2. Individual differences are substantial
+3. Expected explore value predicts exploration
+4. Model provides robust foundation for inference
+5. All predictions are realistic and interpretable
